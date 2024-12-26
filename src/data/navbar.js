@@ -23,7 +23,7 @@ export const navData = [
   },
   {
     label: "Technologies",
-    link: "services",
+    link: "Technologies",
     subCategories: [
       {
         label: "Frontend",
@@ -50,7 +50,7 @@ export const navData = [
       {
         label: "Backend",
         link: "Backend-development",
-        subcategories: [
+        subCategories: [
           {
             label: "Node.js",
             link: "Backend",

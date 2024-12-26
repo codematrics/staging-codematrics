@@ -2,26 +2,25 @@ import Button from "@/components/common/Button";
 
 const TagLine = () => {
   return (
-    <section className="w-full bg-white relative">
-      <video autoPlay loop muted className="tagline-background-video">
+    <section className="w-full min-h-dvh bg-white relative">
+      <video autoPlay loop muted className="w-full min-h-dvh object-cover">
         <source src="/assets/video/tagline-wave-bg.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="absolute top-0 left-0 w-full text-center">
-        <h1 className="text-[52px] font-bold mt-60">
-          The Only Partner You’ll Need for
-          <br />
-          Web, App, and Software Excellence.
-        </h1>
-        <p className="text-2xl mt-10 px-20">
-          Empowering businesses to thrive in the digital age with innovative
-          web, mobile, and software solutions. <br />
-          Our expert team designs and develops modern, scalable technologies to
-          transform your vision
-          <br /> into seamless digital experiences and maximize your ROI.
-        </p>
-        <div className="mt-10 flex justify-center">
-          <Button label={"Contact Us"} href={""} showArrow />
+      <div className="absolute top-0 left-0 right-0 bottom-0 w-full flex justify-center items-center">
+        <div className="text-center w-[60%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-full max-768:px-[40px]">
+          <h1 className="text-[52px] max-1200:text-[48px] max-1030:text-[40px] font-bold">
+            The Only Partner You'll Need for Web, App, and Software Excellence.
+          </h1>
+          <p className="text-[18px] w-[80%] max-1200:text-[16px] max-1030:text-[14px] max-1030:w-[90%] mt-5 opacity-80 mx-auto">
+            Empowering businesses to thrive in the digital age with innovative
+            web, mobile, and software solutions. Our expert team designs and
+            develops modern, scalable technologies to transform your vision into
+            seamless digital experiences and maximize your ROI.
+          </p>
+          <div className="mt-10 flex justify-center">
+            <Button label={"Let's discuss your Project"} href={""} showArrow />
+          </div>
         </div>
       </div>
     </section>
