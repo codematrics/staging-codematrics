@@ -1,10 +1,10 @@
 "use client";
 
+import Button from "@/components/common/Button";
 import { blurBase64 } from "@/data/image";
 import { navData } from "@/data/navbar";
 import Image from "next/image";
 import Logo from "../../public/logo/CodeMatrix.webp";
-
 const Navbar = () => {
   return (
     <header className="w-full px-[40px] py-5">
@@ -105,9 +105,7 @@ const Navbar = () => {
             </div>
           </div>
           <div>
-            <button className="bg-white font-semibold text-black border-[1.5px] border-white hover:bg-black hover:text-white py-3 px-6 rounded-full transition-colors duration-1000">
-              Contact Us
-            </button>
+            <Button label={"Contact Us"} href={""} showArrow />
           </div>
         </div>
       </div>

@@ -1,11 +1,13 @@
+import Button from "@/components/common/Button";
+
 const TagLine = () => {
   return (
-    <section className="w-full bg-white tagline-section">
+    <section className="w-full bg-white relative">
       <video autoPlay loop muted className="tagline-background-video">
         <source src="/assets/video/tagline-wave-bg.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="tagline-content">
+      <div className="absolute top-0 left-0 w-full text-center">
         <h1 className="text-[52px] font-bold mt-60">
           The Only Partner You’ll Need for
           <br />
@@ -18,9 +20,9 @@ const TagLine = () => {
           transform your vision
           <br /> into seamless digital experiences and maximize your ROI.
         </p>
-        <button className="mt-10 bg-white text-black border-[1.5px] border-white hover:bg-black hover:text-white py-3 px-6 rounded-full transition-colors duration-1000">
-          let’s discuss your project
-        </button>
+        <div className="mt-10 flex justify-center">
+          <Button label={"Contact Us"} href={""} showArrow />
+        </div>
       </div>
     </section>
   );
