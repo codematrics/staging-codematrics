@@ -1,3 +1,4 @@
+import { TaglineButtomArrow } from "@/assets/svgs/svg";
 const TagLine = () => {
   return (
     <section className="w-full bg-white tagline-section">
@@ -18,10 +19,12 @@ const TagLine = () => {
           transform your vision
           <br /> into seamless digital experiences and maximize your ROI.
         </p>
-        <button
-          className="mt-10 bg-white text-black border-[1.5px] border-white hover:bg-black hover:text-white py-3 px-6 rounded-full transition-colors duration-1000"
-        >
-          let’s discuss your project
+        <button className="mt-10 bg-white text-black border-[1.5px] border-white py-3 px-6 rounded-full relative overflow-hidden transition-colors duration-1000 group">
+          <span className="relative z-10 transition-colors group-hover:text-white">
+            let’s discuss your project
+          </span>
+          <TaglineButtomArrow />
+          <span className="absolute rounded-full inset-0 bg-black transition-all duration-300 group-hover:translate-x-0 -translate-x-full"></span>
         </button>
       </div>
     </section>
