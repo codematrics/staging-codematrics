@@ -76,17 +76,20 @@ const Services = () => {
             {currentService?.subTitle ?? ""}
           </p>
 
-          <div className="flex flex-wrap flex-col justify-center gap-6 mt-10 sm:mt-12 md:mt-14">
-            {currentService?.subServices?.map((subService, subServiceIndex) => (
-              <p
-                key={subServiceIndex}
-                className="font-bold relative cursor-pointer pb-1 group transition-all duration-300 flex gap-2 items-center"
-              >
-                <TickArrow fill="white" />
-                <span>{subService?.label ?? ""}</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300"></span>
-              </p>
-            ))}
+          <div className=" w-full flex justify-center">
+
+            <div className="flex flex-wrap flex-col justify-center gap-6 mt-10 sm:mt-12 md:mt-14">
+              {currentService?.subServices?.map((subService, subServiceIndex) => (
+                <p
+                  key={subServiceIndex}
+                  className="font-bold relative cursor-pointer pb-1 group transition-all duration-300 flex gap-2 items-center"
+                >
+                  <TickArrow fill="white" />
+                  <span>{subService?.label ?? ""}</span>
+                  {/* <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300"></span> */}
+                </p>
+              ))}
+            </div>
           </div>
 
           <div className="mt-10 sm:mt-12 md:mt-14 flex justify-center">
