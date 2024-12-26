@@ -18,9 +18,7 @@ const TagLine = () => {
           transform your vision
           <br /> into seamless digital experiences and maximize your ROI.
         </p>
-        <button
-          className="mt-10 bg-white text-black border-[1.5px] border-white hover:bg-black hover:text-white py-3 px-6 rounded-full transition-colors duration-1000"
-        >
+        <button className="mt-10 bg-white text-black border-[1.5px] border-white hover:bg-black hover:text-white py-3 px-6 rounded-full transition-colors duration-1000">
           let’s discuss your project
         </button>
       </div>
