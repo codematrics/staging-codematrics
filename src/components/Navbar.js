@@ -11,7 +11,6 @@ import Logo from "../../public/logo/CodeMatrix.webp";
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const [activeSubCategory, setActiveSubCategory] = useState(null);
-  console.log("🚀 ~ Navbar ~ activeSubCategory:", activeSubCategory);
 
   const toggleNav = () => setShowNav(!showNav);
   const handleSubCategoryClick = (category) => {
@@ -34,7 +33,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`w-full px-[40px] py-5 absolute top-0 z-50 ${
+      className={`w-full max-768:px-[20px] px-[40px] py-5 absolute top-0 z-50 ${
         showNav ? "bg-black" : ""
       }`}
     >
@@ -57,7 +56,7 @@ const Navbar = () => {
                   {data.subCategories ? (
                     <>
                       <p
-                        className="cursor-pointer flex items-center relative font-bold max-1250:text-[30px]"
+                        className="cursor-pointer flex items-center relative font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
                         onClick={() => handleSubCategoryClick(data.label)}
                       >
                         {data.label}
@@ -83,7 +82,7 @@ const Navbar = () => {
                           <li key={_} className="group/sub py-2">
                             {category.subCategories?.length ? (
                               <>
-                                <p className="relative font-bold cursor-pointer mx-6 max-1250:text-[30px]">
+                                <p className="relative font-bold cursor-pointer mx-6 max-1250:text-[30px] max-768:text-[25px] text-start">
                                   {category.label}
                                   <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover/sub:w-full"></span>
                                 </p>
@@ -93,7 +92,7 @@ const Navbar = () => {
                                       <li key={_} className="py-1">
                                         <a
                                           href={subCategory.link}
-                                          className="after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 font-bold max-1250:text-[30px]"
+                                          className="after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
                                         >
                                           {subCategory.label}
                                         </a>
@@ -106,7 +105,7 @@ const Navbar = () => {
                               <div className="px-6">
                                 <a
                                   href={category.link}
-                                  className="after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 font-bold max-1250:text-[30px]"
+                                  className="after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
                                 >
                                   {category.label}
                                 </a>
@@ -119,7 +118,7 @@ const Navbar = () => {
                   ) : (
                     <a
                       href={data.link}
-                      className="font-bold after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 max-1250:text-[30px]"
+                      className="font-bold after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 max-1250:text-[30px] max-768:text-[25px] text-start"
                     >
                       {data.label}
                     </a>
@@ -132,8 +131,8 @@ const Navbar = () => {
         <div
           className={`${
             showNav
-              ? "max-1250:block max-1250:absolute top-full left-0 min-h-dvh w-full bg-black px-[40px]"
-              : "max-1250:hidden"
+              ? "max-1250:block max-1250:absolute top-full left-0 min-h-dvh w-full bg-black max-768:px-[20px] px-[40px]"
+              : "hidden"
           }`}
         >
           <ul className="flex max-1250:block gap-8 max-1250:py-[40px]">
@@ -141,7 +140,7 @@ const Navbar = () => {
               return (
                 <li key={_} className="group/main max-1250:py-[20px]">
                   <button
-                    className="cursor-buttonpointer flex items-center relative font-bold max-1250:text-[30px]"
+                    className="cursor-buttonpointer flex items-center relative font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
                     onClick={() => handleSubCategoryClick(data)}
                   >
                     {data.label}
@@ -170,7 +169,7 @@ const Navbar = () => {
             })}
           </ul>
           {activeSubCategory && (
-            <ul className="block absolute top-0 bottom-0 right-0 left-0 bg-black gap-8 p-[40px]">
+            <ul className="hidden max-1250:block absolute top-0 bottom-0 right-0 left-0 bg-black gap-8 max-768:px-[20px] p-[40px]">
               <li className="pb-5">
                 <button
                   className="cursor-pointer p-2 border border-white rounded-full"
@@ -195,7 +194,7 @@ const Navbar = () => {
                 return (
                   <li key={_} className="group/main max-1250:py-[20px]">
                     <button
-                      className="cursor-pointer flex items-center relative font-bold max-1250:text-[30px]"
+                      className="cursor-pointer flex items-center relative font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
                       onClick={() => handleSubCategoryClick(data)}
                     >
                       {data.label}
@@ -224,15 +223,10 @@ const Navbar = () => {
           )}
         </div>
         <div className="flex items-center gap-8 z-[51]">
-          {/* <div>
-            <div>
-              <div></div>
-            </div>
-          </div> */}
           <div className="max-675:hidden">
             <Button label={"Contact Us"} href={""} showArrow />
           </div>
-          <div className="hidden max-1250:block">
+          <div className="hidden max-1250:flex items-center">
             <button onClick={toggleNav} className="text-white">
               {showNav ? <NavBarCloseIcon /> : <NavBarToggleIcon />}
             </button>
