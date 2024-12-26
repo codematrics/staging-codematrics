@@ -72,7 +72,7 @@ export const navData = [
       {
         label: "Database",
         link: "custom-software-development",
-        seubCategories: [
+        subCategories: [
           {
             label: "MongoDB",
             link: "custom-software-development",
