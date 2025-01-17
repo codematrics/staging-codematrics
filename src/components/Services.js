@@ -102,7 +102,8 @@ const Services = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <div className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
+          <div className="">
+          {/* <div className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"> */}
             <img
               src={currentService?.image ?? "path/to/default/image.jpg"}
               alt={currentService?.title ?? "Service Image"}
