@@ -14,10 +14,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <TagLine />
-      <Services />
-      <Technology />
-      <Faq />
+      <Faq showAllFaqs={true}/>
     </>
   );
 }
