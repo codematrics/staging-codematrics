@@ -107,7 +107,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black scrollbar-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black scrollbar-hidden text-white dark:text-white`}
       >
         <div className="min-h-screen">{children}</div>
         <Analytics />

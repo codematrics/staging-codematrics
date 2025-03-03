@@ -224,7 +224,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-8 z-[51]">
           <div className="max-675:hidden">
-            <Button label={"Contact Us"} href={""} showArrow />
+            <Button label={"Contact Us"} href={"/"} showArrow />
           </div>
           <div className="hidden max-1250:flex items-center">
             <button onClick={toggleNav} className="text-white">
