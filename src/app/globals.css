@@ -29,3 +29,15 @@ body {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none !important;
 }
+
+.tecnology-righ-item-main:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #3486dd21;
+  z-index: -1;
+  clip-path: polygon(60% 0, 100% 0, 100% 100%, 78% 59%, 48% 47%, 37% 15%, 0 0);
+}

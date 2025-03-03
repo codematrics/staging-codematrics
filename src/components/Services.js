@@ -9,7 +9,7 @@ import Image from "next/image";
 const Services = () => {
   const [currentService, setCurrentService] = useState(services[0]);
   return (
-    <section className="py-12 px-4 sm:px-8 md:px-12 flex justify-center">
+    <section className="py-12 flex justify-center">
       <div className="w-[70%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-full">
         <p className="text-[52px] leading-[57px] max-1200:text-[48px] max-1200:leading-[53px] max-1030:text-[40px] max-1030:leading-[45px] max-600:text-[35px] max-600:leading-[40px] max-420:text-[27px] max-420:leading-[32px] text-center font-bold">
           Delivering Seamless Digital Experiences Through Innovation
@@ -69,7 +69,7 @@ const Services = () => {
 
         <div className="mt-10 sm:mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
           <div className="flex flex-col justify-center">
-            <p className="text-3xl sm:text-4xl md:text-5xl text-center font-bold">
+            <p className="text-[40px] leading-[45px] max-1200:text-[36px] max-1200:leading-[41px] max-1030:text-[28px] max-1030:leading-[33px] max-600:text-[23px] max-600:leading-[28px] max-420:text-[15px] max-420:leading-[20px] text-center font-bold">
               {currentService?.title ?? ""}
             </p>
             <p className="text-base sm:text-lg md:text-xl text-center mt-4 sm:mt-5 md:mt-6">
@@ -107,7 +107,7 @@ const Services = () => {
               height={500}
               src={currentService?.image}
               alt={currentService?.title ?? "Service Image"}
-              className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 max-w-[65%]"
+              className="w-full"
             />
           </div>
         </div>
