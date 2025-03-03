@@ -1,10 +1,10 @@
 "use client";
 
 import Button from "@/components/common/Button";
-import { services } from "./../data/services";
-import { TickArrow } from "./../assets/svgs/svg";
-import React, { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
+import { TickArrow } from "./../assets/svgs/svg";
+import { services } from "./../data/services";
 
 const Services = () => {
   const [currentService, setCurrentService] = useState(services[0]);
