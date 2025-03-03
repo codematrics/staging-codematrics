@@ -32,7 +32,7 @@ const Faqs = ({ showAllFaqs = false, showFaqDigit = 5 }) => {
   const faqsToShow = showAllFaqs ? faqs : faqs.slice(0, showFaqDigit);
 
   return (
-    <section className="w-full bg-black relative text-white py-8 flex flex-col items-center justify-center">
+    <section className="w-full bg-black relative text-white py-8 flex flex-col items-center justify-center mt-16">
       <div className="w-full max-w-4xl px-4">
         <p className="text-3xl sm:text-4xl md:text-5xl text-center font-bold mb-8">
           FAQs
