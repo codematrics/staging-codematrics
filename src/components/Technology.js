@@ -4,10 +4,6 @@ import Image from "next/image";
 import { technologies } from "@/data/technology";
 import { useState } from "react";
 
-const SelectionCard = ({ imageUrl, label, handleClick }) => {
-  return <Image src="/assets/svgs/front-end.svg" />;
-};
-
 const Technology = () => {
   const [active, setActive] = useState(0);
 
