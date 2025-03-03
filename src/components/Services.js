@@ -107,7 +107,7 @@ const Services = () => {
             <img
               src={currentService?.image ?? "path/to/default/image.jpg"}
               alt={currentService?.title ?? "Service Image"}
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto rounded-lg shadow-lg max-w-[65%]"
             />
           </div>
         </div>
