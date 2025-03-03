@@ -60,9 +60,6 @@ export const metadata: Metadata = {
     images: ["https://codematrics.com/assets/CodeMatrics.webp"],
     card: "summary_large_image",
   },
-  icons: {
-    icon: "/CodeMatrics.ico",
-  },
 };
 
 export default function RootLayout({
@@ -77,11 +74,6 @@ export default function RootLayout({
           name="google-site-verification"
           content="P0jHynGstXmNhoxIBQTnL-74RdmQrL1bBav43LQRTwA"
         />
-        {/* <link
-          rel="icon"
-          href="/CodeMatrics.ico"
-          type="image/x-icon"
-        /> */}
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
           rel="stylesheet"
@@ -116,7 +108,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black scrollbar-hidden`}
       >
         <div className="min-h-screen">{children}</div>
         <Analytics />

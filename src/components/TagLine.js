@@ -3,7 +3,7 @@ import Button from "@/components/common/Button";
 
 const TagLine = () => {
   return (
-    <section className="w-full bg-black min-1024:py-[220px] max-1024:min-768:py-[170px] max-768:py-[130px] relative text-white overflow-hidden">
+    <section className="w-full bg-black min-1024:py-[260px] max-1024:min-768:py-[170px] max-768:py-[130px] relative text-white overflow-hidden">
       <video
         autoPlay
         loop
@@ -29,7 +29,7 @@ const TagLine = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="absolute animate-bounce bottom-[10px] left-[50%] translate-x-[-50%] z-40">
         <ScrollDown height={30} width={30}/>
       </div>
     </section>
