@@ -95,7 +95,7 @@ const Services = () => {
             <div className="mt-10 sm:mt-12 md:mt-14 flex justify-center">
               <Button
                 label={"Learn More"}
-                href={currentService?.link ?? ""}
+                href={currentService?.link ?? "/"}
                 showArrow
               />
             </div>

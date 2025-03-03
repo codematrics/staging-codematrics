@@ -9,13 +9,15 @@ const FaqHoc = ({ question, answer, openIndex, setOpenIndex, faqIndex }) => {
   return (
     <div className="w-full flex flex-col items-center justify-center mb-4">
       <div
-        className="w-full flex items-center justify-between cursor-pointer p-3 sm:p-4 md:p-5 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors duration-300"
+        className="w-full flex items-center justify-between cursor-pointer p-3 sm:p-4 md:p-5 bg-[#3486dd21] hover:bg-gray-700 rounded-md transition-colors duration-300"
         onClick={() => setOpenIndex(faqIndex === openIndex ? null : faqIndex)}
       >
         <p className="text-xs sm:text-sm md:text-lg lg:text-xl font-semibold text-white whitespace-nowrap overflow-hidden text-ellipsis">
           {question}
         </p>
-        <p className="text-xl text-white">{faqIndex === openIndex ? "-" : "+"}</p>
+        <p className="text-xl text-white">
+          {faqIndex === openIndex ? "-" : "+"}
+        </p>
       </div>
       {faqIndex === openIndex && (
         <div className="w-full p-4 sm:p-5 md:p-6 mt-4 bg-black text-white rounded-lg shadow-lg transition-all duration-300">
