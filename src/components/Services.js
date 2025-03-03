@@ -4,18 +4,16 @@ import Button from "@/components/common/Button";
 import { services } from "./../data/services";
 import { TickArrow } from "./../assets/svgs/svg";
 import React, { useState } from "react";
+import Image from "next/image";
+
 const Services = () => {
   const [currentService, setCurrentService] = useState(services[0]);
   return (
-    <section className="w-full border-b border-t border-red py-12 px-4 sm:px-8 md:px-12">
-      <p className="text-3xl sm:text-4xl md:text-5xl text-center font-bold">
-        Delivering Seamless Digital Experiences with Innovation at the Core
-      </p>
+    <section className="py-12 px-4 sm:px-8 md:px-12 w-[60%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-full align-self-center">
+      <p className="text-[52px] leading-[57px] max-1200:text-[48px] max-1200:leading-[53px] max-1030:text-[40px] max-1030:leading-[45px] max-600:text-[35px] max-600:leading-[40px] max-420:text-[27px] max-420:leading-[32px] text-center font-bold">
+        Delivering Seamless Digital Experiences Through Innovation</p>
       <p className="text-base sm:text-lg md:text-xl text-center mt-4 sm:mt-5 md:mt-6">
-        We partner with businesses to design, develop, and deliver innovative
-        web, mobile, and software solutions. <br />
-        Together, we craft tailored approaches to drive growth, overcome
-        challenges, and shape a sustainable digital future
+        Partnering to Design, Develop & Deliver Innovative Digital Solutions
       </p>
       <div className="mt-10 sm:mt-12 md:mt-14">
 
@@ -62,10 +60,7 @@ const Services = () => {
             </p>
           ))}
         </div>
-
-
       </div>
-
 
       <div className="mt-10 sm:mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
         <div className="flex flex-col justify-center">
@@ -86,7 +81,6 @@ const Services = () => {
                 >
                   <TickArrow fill="white" />
                   <span>{subService?.label ?? ""}</span>
-                  {/* <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300"></span> */}
                 </p>
               ))}
             </div>
@@ -102,14 +96,13 @@ const Services = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <div className="">
-          {/* <div className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"> */}
-            <img
-              src={currentService?.image ?? "path/to/default/image.jpg"}
-              alt={currentService?.title ?? "Service Image"}
-              className="w-full h-auto rounded-lg shadow-lg"
-            />
-          </div>
+          <Image
+            width={500}
+            height={500}
+            src={currentService?.image}
+            alt={currentService?.title ?? "Service Image"}
+            className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"
+          />
         </div>
       </div>
     </section>

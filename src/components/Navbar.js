@@ -33,7 +33,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`w-full max-768:px-[20px] px-[40px] py-5 absolute top-0 z-50 ${
+      className={`w-full max-768:px-[20px] px-[40px] py-5 absolute top-0 z-50 text-white ${
         showNav ? "bg-black" : ""
       }`}
     >

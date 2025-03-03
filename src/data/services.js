@@ -49,7 +49,7 @@ export const services = [
     subTitle:
       "Delivering bespoke software tailored to solve unique business challenges.",
     link: "Custom-Software-Development",
-    image:"https://img.freepik.com/free-vector/flat-cms-concept-blue-shades_23-2148820933.jpg?t=st=1737114121~exp=1737117721~hmac=bc622a91532780d3a59d0ce1d0d2ca0f26b6ec0ed51600dd89b3d846e986df71&w=740",
+    image:"/assets/images/custom-software.jpg",
     subServices: [
       {
         label: "Enterprise Application Development",
