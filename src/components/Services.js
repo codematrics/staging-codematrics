@@ -101,7 +101,7 @@ const Services = () => {
             height={500}
             src={currentService?.image}
             alt={currentService?.title ?? "Service Image"}
-            className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"
+            className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 max-w-[65%]"
           />
         </div>
       </div>

@@ -15,8 +15,54 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Codematrics - web development and mobile app development company",
-  description: "Codematrics is a leading web development and mobile app development company, specializing in creating high-performance websites and innovative mobile applications. We offer custom software solutions, UI/UX design, e-commerce development, and enterprise-level applications to help businesses grow digitally. Our expert developers leverage the latest technologies to build scalable, secure, and user-friendly applications. Partner with us to transform your ideas into reality.",
+  title: "CodeMatrics - Leading the Way in Innovative IT Solutions",
+  description:
+    "Transform your business with innovative IT solutions by CodeMatrics. Get IT consulting, cloud computing, cybersecurity, and custom software development services tailored for success.",
+  keywords: [
+    "Innovative IT solutions",
+    "Best IT services",
+    "IT consulting",
+    "Digital transformation",
+    "Cloud computing",
+    "Cybersecurity",
+    "Custom software development",
+    "IT infrastructure",
+    "Affordable IT services",
+    "Website Development",
+    "Website Design",
+    "Website Design and Development",
+    "Web Development",
+    "Mobile App Development",
+    "codematrix",
+    "codematrix It",
+    "codematric",
+    "codemetric",
+    "codematrics",
+    "codematrics",
+  ],
+  openGraph: {
+    title: "CodeMatrics - Leading the Way in Innovative IT Solutions",
+    description:
+      "Stay tuned for cutting-edge IT solutions that will transform the way you work and grow.",
+    url: "https://codematrics.com",
+    images: [
+      {
+        url: "https://codematrics.com/assets/CodeMatrics.webp",
+        alt: "CodeMatrics Logo",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    title: "CodeMatrics - Leading the Way in Innovative IT Solutions",
+    description:
+      "Discover innovative IT solutions by CodeMatrics, transforming businesses for the future.",
+    images: ["https://codematrics.com/assets/CodeMatrics.webp"],
+    card: "summary_large_image",
+  },
+  icons: {
+    icon: "/CodeMatrics.ico",
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +71,47 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="P0jHynGstXmNhoxIBQTnL-74RdmQrL1bBav43LQRTwA"
+        />
+        {/* <link
+          rel="icon"
+          href="/CodeMatrics.ico"
+          type="image/x-icon"
+        /> */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="preload"
+          href="https://codematrics.com/assets/CodeMatrics.webp"
+          as="image"
+        />
+        <link
+          rel="canonical"
+          href="https://codematrics.com"
+        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "CodeMatrics",
+            url: "https://codematrics.com",
+            logo: "https://codematrics.com/assets/CodeMatrics.webp",
+            description:
+              "CodeMatrics is a hub for innovative IT solutions designed to transform businesses.",
+            sameAs: [
+              "https://www.facebook.com/CodeMatrics",
+              "https://twitter.com/CodeMatrics",
+              "https://www.linkedin.com/company/codematrics",
+            ],
+          })}
+        </script>
+      </head>
       <head>
         <meta name="theme-color" content="#000" />
       </head>
