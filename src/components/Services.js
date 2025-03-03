@@ -10,7 +10,7 @@ const Services = () => {
   const [currentService, setCurrentService] = useState(services[0]);
   return (
     <section className="py-12 flex justify-center">
-      <div className="w-[70%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-full">
+      <div className="w-[70%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-[90%]">
         <p className="text-[52px] leading-[57px] max-1200:text-[48px] max-1200:leading-[53px] max-1030:text-[40px] max-1030:leading-[45px] max-600:text-[35px] max-600:leading-[40px] max-420:text-[27px] max-420:leading-[32px] text-center font-bold">
           Delivering Seamless Digital Experiences Through Innovation
         </p>

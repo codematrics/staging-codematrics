@@ -3,11 +3,20 @@ export const technologies = [
     title: "Front End",
     color: "#FFFFFF",
     subText:
-      "Creating seamless user interfaces with modern frameworks and libraries.",
+      "We develop interactive software that seamlessly integrates UI and business logic. Embrace our Frontend solution to engage your customers and deliver a robust user experience.",
     icon: "/assets/svgs/technology/front-end.svg",
     skills: [
       {
-        icon: "",
+        name: "reactJS",
+        icon: "/assets/svgs/technology/logos/react.svg",
+      },
+      {
+        name: "angularJS",
+        icon: "/assets/svgs/technology/logos/angular.svg",
+      },
+      {
+        name: "vueJS",
+        icon: "/assets/svgs/technology/logos/vue.svg",
       },
     ],
   },
@@ -15,11 +24,20 @@ export const technologies = [
     title: "Back End",
     color: "#E98724",
     subText:
-      "Powering applications with scalable, secure, and high-performing backend technologies.",
+      "We deliver performance-focused and secure backend solutions tailored to each client's needs. Get reliable Backend code to unlock your digital core transformation.",
     icon: "/assets/svgs/technology/back-end.svg",
     skills: [
       {
-        icon: "",
+        name: "expressJS",
+        icon: "/assets/svgs/technology/logos/express.svg",
+      },
+      {
+        name: "nodeJS",
+        icon: "/assets/svgs/technology/logos/node.svg",
+      },
+      {
+        name: "django",
+        icon: "/assets/svgs/technology/logos/django.svg",
       },
     ],
   },
@@ -31,7 +49,16 @@ export const technologies = [
     icon: "/assets/svgs/technology/database.svg",
     skills: [
       {
-        icon: "",
+        name: "mysql",
+        icon: "/assets/svgs/technology/logos/mysql.svg",
+      },
+      {
+        name: "postgresql",
+        icon: "/assets/svgs/technology/logos/postgresql.svg",
+      },
+      {
+        name: "mongoDB",
+        icon: "/assets/svgs/technology/logos/mongodb.svg",
       },
     ],
   },
@@ -43,7 +70,12 @@ export const technologies = [
     icon: "/assets/svgs/technology/mobile-app.svg",
     skills: [
       {
-        icon: "",
+        name: "flutter",
+        icon: "/assets/svgs/technology/logos/flutter.svg",
+      },
+      {
+        name: "reactNative",
+        icon: "/assets/svgs/technology/logos/react.svg",
       },
     ],
   },

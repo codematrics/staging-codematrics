@@ -14,7 +14,7 @@ const TagLine = () => {
         Your browser does not support the video tag.
       </video>
       <div className="w-full flex justify-center items-center relative z-[2]">
-        <div className="text-center w-[60%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-full max-768:px-[40px] max-600:px-[20px]">
+        <div className="text-center w-[60%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-[90%] max-768:px-[40px] max-600:px-[20px]">
           <h1 className="static text-[52px] leading-[57px] max-1200:text-[48px] max-1200:leading-[53px] max-1030:text-[40px] max-1030:leading-[45px] max-600:text-[35px] max-600:leading-[40px] max-420:text-[27px] max-420:leading-[32px] font-bold text-white">
             The Only Partner You&apos;ll Need for Web, App, and Software
             Excellence.
@@ -30,7 +30,7 @@ const TagLine = () => {
         </div>
       </div>
       <div className="absolute animate-bounce bottom-[10px] left-[50%] translate-x-[-50%] z-40">
-        <ScrollDown height={30} width={30}/>
+        <ScrollDown height={30} width={30} />
       </div>
     </section>
   );

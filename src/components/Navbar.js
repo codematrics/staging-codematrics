@@ -2,11 +2,11 @@
 
 import { NavBarCloseIcon, NavBarToggleIcon } from "@/assets/svgs/svg";
 import Button from "@/components/common/Button";
-import { blurBase64 } from "@/data/image";
 import { navData } from "@/data/navbar";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Logo from "../../public/logo/CodeMatrix.webp";
+import Link from "next/link";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -38,16 +38,16 @@ const Navbar = () => {
       }`}
     >
       <div className="w-full flex justify-between items-center">
-        <div className="flex items-center z-[51]">
+        <Link href={"/"} className="flex items-center z-[51]">
           <Image
             src={Logo}
             height={50}
             alt="codematrics"
-            blurDataURL={blurBase64}
+            // blurDataURL={blurBase64}
             placeholder="blur"
           />
           <p className="text-2xl font-bold ml-1 max-420:hidden">CodeMatrics</p>
-        </div>
+        </Link>
         <div className="max-1250:hidden">
           <ul className="flex max-1250:block gap-8 max-1250:py-[40px]">
             {navData.map((data, _) => {
@@ -90,12 +90,12 @@ const Navbar = () => {
                                   {category.subCategories.map(
                                     (subCategory, _) => (
                                       <li key={_} className="py-1">
-                                        <a
+                                        <Link
                                           href={subCategory.link}
                                           className="after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
                                         >
                                           {subCategory.label}
-                                        </a>
+                                        </Link>
                                       </li>
                                     )
                                   )}
@@ -103,12 +103,12 @@ const Navbar = () => {
                               </>
                             ) : (
                               <div className="px-6">
-                                <a
+                                <Link
                                   href={category.link}
                                   className="after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
                                 >
                                   {category.label}
-                                </a>
+                                </Link>
                               </div>
                             )}
                           </li>
@@ -116,12 +116,12 @@ const Navbar = () => {
                       </ul>
                     </>
                   ) : (
-                    <a
+                    <Link
                       href={data.link}
                       className="font-bold after:block after:w-0 hover:after:w-full after:h-[2px] after:bg-white after:bottom-0 after:transition-all after:duration-300 max-1250:text-[30px] max-768:text-[25px] text-start"
                     >
                       {data.label}
-                    </a>
+                    </Link>
                   )}
                 </li>
               );
