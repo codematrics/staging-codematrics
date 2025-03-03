@@ -1,9 +1,4 @@
 import Faq from "@/components/Faq";
-import Navbar from "@/components/Navbar";
-import Services from "@/components/Services";
-import TagLine from "@/components/TagLine";
-import Technology from "@/components/Technology";
-import Footer from "@/components/Footer";
 
 export default function Home() {
 
@@ -13,12 +8,7 @@ export default function Home() {
     );
   return (
     <>
-      <Navbar />
-      <TagLine />
-      <Services />
-      <Technology />
-      <Faq />
-      <Footer />
+      <Faq showAllFaqs={true}/>
     </>
   );
 }
