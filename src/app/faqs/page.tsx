@@ -1,9 +1,5 @@
-import Navbar from "@/components/Navbar";
-import TagLine from "@/components/TagLine";
-import Services from "@/components/Services";
 import Faq from "@/components/Faq";
-import { useEffect } from 'react';
-import Technology from "@/components/Technology";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
 
