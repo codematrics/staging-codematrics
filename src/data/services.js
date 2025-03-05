@@ -27,7 +27,7 @@ export const services = [
     subTitle:
       "Creating intuitive and visually engaging designs that enhance user experiences.",
     link: "UI-UX-Design",
-    image:"/assets/images/UI-UX-Developer.png",
+    image: "/assets/images/UI-UX-Developer.png",
     subServices: [
       {
         label: "User Research and Journey Mapping",
@@ -49,7 +49,7 @@ export const services = [
     subTitle:
       "Delivering bespoke software tailored to solve unique business challenges.",
     link: "Custom-Software-Development",
-    image:"/assets/images/custom-software.jpg",
+    image: "/assets/images/custom-software.jpg",
     subServices: [
       {
         label: "Enterprise Application Development",
@@ -71,7 +71,7 @@ export const services = [
     subTitle:
       "Developing powerful mobile apps to keep your business at your customers' fingertips.",
     link: "Mobile-App-Development",
-    image:"/assets/images/mobile-development.png",
+    image: "/assets/images/mobile-development.png",
     subServices: [
       {
         label: "Native App Development (iOS & Android)",

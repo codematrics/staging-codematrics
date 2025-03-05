@@ -25,13 +25,15 @@ const Technology = () => {
                 onClick={() => setActive(_)}
                 className={`w-full max-900:w-[48%] border max-900:border-white ${
                   active === _ ? "border-white" : "border-transparent"
-                } my-3 py-[25px] cursor-pointer rounded-[10px] px-3 flex items-center justify-start gap-4 relative`}
+                } my-3 cursor-pointer rounded-[10px] px-3 max-1200:px-2 gap-4 max-1200:gap-2 py-[25px] max-1200:py-[18px] flex items-center justify-start relative`}
               >
                 <Image
                   src={tech.icon}
                   height={70}
                   width={70}
                   alt={tech.title}
+                  // placeholder="blur"
+                  className="w-[70px] max-1200:width-[66px] max-1030:w-[36px]"
                 />
                 <p
                   className={`font-bold text-[20px] leading-[25px] max-1200:text-[16px] max-1200:leading-[21px] max-1030:text-[18px] before:content-['${
@@ -48,7 +50,7 @@ const Technology = () => {
               <p className="font-bold text-[40px] leading-[45px] max-1200:text-[36px] max-1200:leading-[41px] max-1030:text-[28px] max-1030:leading-[33px] max-600:text-[23px] max-600:leading-[28px] max-420:text-[15px] max-420:leading-[20px]">
                 {technologies[active].title}
               </p>
-              <p className="mt-2 w-[80%] text-[20px] leading-[25px] max-1200:text-[18px]">
+              <p className="mt-2 w-[80%] sm:text-lg md:text-xl">
                 {technologies[active].subText}
               </p>
               <div className="flex mt-[40px] gap-8 items-center">

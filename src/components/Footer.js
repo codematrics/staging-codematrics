@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Logo from "../../public/logo/CodeMatrix.webp";
 import Link from "next/link";
-import { navData } from "@/data/navbar";
+import { footerData } from "@/data/footer";
 
 const Footer = () => {
   return (
@@ -16,7 +16,7 @@ const Footer = () => {
             height={50}
             width={50}
             alt="codematrics"
-            placeholder="blur"
+            // placeholder="blur"
           />
           <p className="text-2xl font-bold ml-2">CodeMatrics</p>
         </Link>
@@ -58,9 +58,9 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-            {navData.map((data, _) => {
+            {footerData.map((data, _) => {
               return (
-                <Link key={_} href={data.link} passHref>
+                <Link key={_} href={data.href} passHref>
                   <p className="text-lg md:text-md font-semibold text-center">
                     {data.label}
                   </p>

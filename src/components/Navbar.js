@@ -44,7 +44,7 @@ const Navbar = () => {
             height={50}
             alt="codematrics"
             // blurDataURL={blurBase64}
-            placeholder="blur"
+            // placeholder="blur"
           />
           <p className="text-2xl font-bold ml-1 max-420:hidden">CodeMatrics</p>
         </Link>
@@ -224,7 +224,12 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-8 z-[51]">
           <div className="max-675:hidden">
-            <Button label={"Contact Us"} href={"/"} showArrow />
+            <Button
+              type="link"
+              label={"Contact Us"}
+              href={"/contact-us"}
+              showArrow
+            />
           </div>
           <div className="hidden max-1250:flex items-center">
             <button onClick={toggleNav} className="text-white">
