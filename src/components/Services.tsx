@@ -3,11 +3,14 @@
 import Button from "@/components/common/Button";
 import Image from "next/image";
 import { useState } from "react";
-import { TickArrow } from "./../assets/svgs/svg";
-import { services } from "./../data/services";
+import { TickArrow } from "../assets/svgs/svg";
+import { Service, services } from "../data/services";
 
 const Services = () => {
-  const [currentService, setCurrentService] = useState(services[0]);
+  const [currentService, setCurrentService] = useState<Service | undefined>(
+    services[0]
+  );
+
   return (
     <section className="py-12 flex justify-center">
       <div className="w-[70%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-[90%]">
@@ -94,6 +97,7 @@ const Services = () => {
 
             <div className="mt-10 sm:mt-12 md:mt-14 flex justify-center">
               <Button
+                type="link"
                 label={"Learn More"}
                 href={currentService?.link ?? "/"}
                 showArrow
@@ -105,7 +109,7 @@ const Services = () => {
             <Image
               width={500}
               height={500}
-              src={currentService?.image}
+              src={currentService?.image as string}
               alt={currentService?.title ?? "Service Image"}
               className="w-full"
             />

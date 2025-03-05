@@ -1,4 +1,16 @@
-export const navData = [
+export interface SubCategory {
+  label: string;
+  link: string;
+  subCategories?: SubCategory[];
+}
+
+export interface NavItem {
+  label: string;
+  link: string;
+  subCategories?: SubCategory[];
+}
+
+export const navData: NavItem[] = [
   {
     label: "Services",
     link: "services",
@@ -94,7 +106,7 @@ export const navData = [
       {
         label: "Mobile App Development",
         link: "mobile-app-development",
-        subcategories: [
+        subCategories: [
           {
             label: "React Native",
             link: "mobile-app-development",

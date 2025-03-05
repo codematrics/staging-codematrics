@@ -2,18 +2,20 @@
 
 import { NavBarCloseIcon, NavBarToggleIcon } from "@/assets/svgs/svg";
 import Button from "@/components/common/Button";
-import { navData } from "@/data/navbar";
+import { navData, NavItem } from "@/data/navbar";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Logo from "../../public/logo/CodeMatrix.webp";
 import Link from "next/link";
 
 const Navbar = () => {
-  const [showNav, setShowNav] = useState(false);
-  const [activeSubCategory, setActiveSubCategory] = useState(null);
+  const [showNav, setShowNav] = useState<boolean>(false);
+  const [activeSubCategory, setActiveSubCategory] = useState<NavItem | null>(
+    null
+  );
 
   const toggleNav = () => setShowNav(!showNav);
-  const handleSubCategoryClick = (category) => {
+  const handleSubCategoryClick = (category: NavItem) => {
     setActiveSubCategory(category);
   };
 
@@ -39,13 +41,7 @@ const Navbar = () => {
     >
       <div className="w-full flex justify-between items-center">
         <Link href={"/"} className="flex items-center z-[51]">
-          <Image
-            src={Logo}
-            height={50}
-            alt="codematrics"
-            // blurDataURL={blurBase64}
-            // placeholder="blur"
-          />
+          <Image src={Logo} height={50} alt="codematrics" />
           <p className="text-2xl font-bold ml-1 max-420:hidden">CodeMatrics</p>
         </Link>
         <div className="max-1250:hidden">
@@ -57,7 +53,7 @@ const Navbar = () => {
                     <>
                       <p
                         className="cursor-pointer flex items-center relative font-bold max-1250:text-[30px] max-768:text-[25px] text-start"
-                        onClick={() => handleSubCategoryClick(data.label)}
+                        onClick={() => handleSubCategoryClick(data)}
                       >
                         {data.label}
                         <span>
@@ -190,7 +186,7 @@ const Navbar = () => {
                   </svg>
                 </button>
               </li>
-              {activeSubCategory.subCategories?.map((data, _) => {
+              {activeSubCategory?.subCategories?.map((data, _) => {
                 return (
                   <li key={_} className="group/main max-1250:py-[20px]">
                     <button

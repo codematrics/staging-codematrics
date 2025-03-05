@@ -5,7 +5,7 @@ import { technologies } from "@/data/technology";
 import { useState } from "react";
 
 const Technology = () => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState<number>(0);
 
   return (
     <section className="py-12 flex justify-center bg-black relative text-white">
@@ -54,7 +54,7 @@ const Technology = () => {
                 {technologies[active].subText}
               </p>
               <div className="flex mt-[40px] gap-8 items-center">
-                {technologies[active].skills.map((skill, _) => (
+                {technologies[active]?.skills?.map((skill, _) => (
                   <div key={_}>
                     <Image
                       src={skill.icon}

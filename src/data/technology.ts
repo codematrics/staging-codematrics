@@ -1,4 +1,17 @@
-export const technologies = [
+export interface Skill {
+  name: string;
+  icon: string;
+}
+
+export interface Technology {
+  title: string;
+  color: string;
+  subText: string;
+  icon: string;
+  skills?: Skill[];
+}
+
+export const technologies: Technology[] = [
   {
     title: "Front End",
     color: "#FFFFFF",

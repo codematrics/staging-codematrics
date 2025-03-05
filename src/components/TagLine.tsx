@@ -25,7 +25,12 @@ const TagLine = () => {
             maximize ROI.
           </p>
           <div className="mt-10 flex justify-center">
-            <Button label={"Let's discuss your Project"} href={"/"} showArrow />
+            <Button
+              type="link"
+              label={"Let's discuss your Project"}
+              href={"/contact-us"}
+              showArrow
+            />
           </div>
         </div>
       </div>

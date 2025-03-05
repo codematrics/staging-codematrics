@@ -1,4 +1,9 @@
-export const footerData = [
+export interface FooterLink {
+  label: string;
+  href: string;
+}
+
+export const footerData: FooterLink[] = [
   {
     label: "Services",
     href: "/services",

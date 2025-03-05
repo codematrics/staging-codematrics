@@ -1,11 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { faqs } from "../data/faqs";
 import Button from "./common/Button";
 
-// FAQ Component for each FAQ
-const FaqHoc = ({ question, answer, openIndex, setOpenIndex, faqIndex }) => {
+interface FaqHocProps {
+  question: string;
+  answer: string;
+  openIndex: number | null;
+  setOpenIndex: Dispatch<SetStateAction<number | null>>;
+  faqIndex: number;
+}
+
+interface FaqProps {
+  showAllFaqs?: boolean;
+  showFaqDigit?: number;
+}
+
+const FaqHoc: React.FC<FaqHocProps> = ({
+  question,
+  answer,
+  openIndex,
+  setOpenIndex,
+  faqIndex,
+}) => {
   return (
     <div className="w-full flex flex-col items-center justify-center mb-4">
       <div
@@ -28,8 +46,11 @@ const FaqHoc = ({ question, answer, openIndex, setOpenIndex, faqIndex }) => {
   );
 };
 
-const Faqs = ({ showAllFaqs = false, showFaqDigit = 5 }) => {
-  const [openIndex, setOpenIndex] = useState(null);
+const Faqs: React.FC<FaqProps> = ({
+  showAllFaqs = false,
+  showFaqDigit = 5,
+}) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqsToShow = showAllFaqs ? faqs : faqs.slice(0, showFaqDigit);
 
@@ -53,10 +74,10 @@ const Faqs = ({ showAllFaqs = false, showFaqDigit = 5 }) => {
         })}
       </div>
 
-      {/* Show more button only if showAllFaqs is false */}
       {!showAllFaqs && (
         <div className="mt-6 px-4 w-full flex justify-center">
           <Button
+            type="link"
             label={"Show More FAQs"}
             href={"/faqs"}
             showArrow

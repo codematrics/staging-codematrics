@@ -1,4 +1,18 @@
-export const services = [
+export interface SubService {
+  label: string;
+  link: string;
+}
+
+export interface Service {
+  title: string;
+  shortName: string;
+  subTitle: string;
+  link: string;
+  image: string;
+  subServices: SubService[];
+}
+
+export const services: Service[] = [
   {
     title: "Full-Stack Development",
     shortName: "Full-Stack",

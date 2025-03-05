@@ -20,7 +20,13 @@ export default function NotFound() {
           </p>
         </div>
 
-        <Button label={"Return Home"} classes={"mt-6"} href={"/"} showArrow />
+        <Button
+          type="link"
+          label={"Return Home"}
+          classes={"mt-6"}
+          href={"/"}
+          showArrow
+        />
       </div>
       <Footer />
     </div>
