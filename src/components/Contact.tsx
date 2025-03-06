@@ -12,7 +12,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         placeholder={label}
-        className={`w-full p-3 bg-[#e5e7eb1f] text-white border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-white ${
+        className={`w-full p-3 bg-[#e5e7eb1f] text-black border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-white ${
           error ? "border-red-700" : "border-gray-700"
         }`}
         onBlur={onBlur}
@@ -38,7 +38,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <select
         ref={ref}
         onBlur={onBlur}
-        className={`w-full p-3 bg-[#e5e7eb1f] text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white ${
+        className={`w-full p-3 bg-[#e5e7eb1f] text-black border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white ${
           error ? "border-red-700" : "border-gray-700"
         }`}
         name={label}
@@ -50,7 +50,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <option
             key={index}
             value={option}
-            className="bg-black text-white py-2"
+            className="bg-white text-black py-2"
           >
             {option}
           </option>

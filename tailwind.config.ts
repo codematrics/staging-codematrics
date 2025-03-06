@@ -6,13 +6,18 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: [
-    {
-      pattern: /clip-path-.*/,
-    },
-  ],
+
   theme: {
     extend: {
+      keyframes: {
+        shine: {
+          "0%": { backgroundPosition: "200% center" },
+          "100%": { backgroundPosition: "0% center" },
+        },
+      },
+      animation: {
+        shine: "shine 2s linear infinite",
+      },
       screens: {
         "768": "768px",
         "420": "420px",

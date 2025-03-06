@@ -24,13 +24,13 @@ const Services = () => {
           <div className="sm:hidden">
             <label
               htmlFor="service-dropdown"
-              className="block text-sm text-white mb-2"
+              className="block text-sm text-black mb-2"
             >
               Select a Service
             </label>
             <select
               id="service-dropdown"
-              className="w-full p-4 bg-gray-800 text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+              className="w-full p-4 bg-gray-800 text-black rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
               onChange={(e) => {
                 const selectedService = services.find(
                   (service) => service.shortName === e.target.value
@@ -61,7 +61,7 @@ const Services = () => {
                 <span className="z-10">{service.shortName ?? ""}</span>
 
                 <span
-                  className={`absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full ${
+                  className={`absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full ${
                     currentService === service ? "w-full" : ""
                   }`}
                 ></span>

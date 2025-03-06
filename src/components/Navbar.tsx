@@ -35,8 +35,8 @@ const Navbar = () => {
 
   return (
     <header
-      className={`w-full max-768:px-[20px] px-[40px] py-5 absolute top-0 z-50 text-white ${
-        showNav ? "bg-black" : ""
+      className={`w-full max-768:px-[20px] px-[40px] py-5 absolute top-0 z-50 text-black ${
+        showNav ? "bg-white" : ""
       }`}
     >
       <div className="w-full flex justify-between items-center">
@@ -73,7 +73,7 @@ const Navbar = () => {
                         </span>
                         <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover/main:w-full"></span>
                       </p>
-                      <ul className="hidden group-hover/main:block absolute p-2 shadow-lg py-6 bg-black min-w-[250px] z-50">
+                      <ul className="hidden group-hover/main:block absolute p-2 shadow-lg py-6 bg-white min-w-[250px] z-50">
                         {data.subCategories?.map((category, _) => (
                           <li key={_} className="group/sub py-2">
                             {category.subCategories?.length ? (
@@ -82,7 +82,7 @@ const Navbar = () => {
                                   {category.label}
                                   <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover/sub:w-full"></span>
                                 </p>
-                                <ul className="hidden group-hover/sub:block absolute left-full top-0 p-2 shadow-lg py-6 min-w-[250px] bg-black px-6 z-[51] min-h-full">
+                                <ul className="hidden group-hover/sub:block absolute left-full top-0 p-2 shadow-lg py-6 min-w-[250px] bg-white px-6 z-[51] min-h-full">
                                   {category.subCategories.map(
                                     (subCategory, _) => (
                                       <li key={_} className="py-1">
@@ -127,7 +127,7 @@ const Navbar = () => {
         <div
           className={`${
             showNav
-              ? "max-1250:block max-1250:absolute top-full left-0 min-h-dvh w-full bg-black max-768:px-[20px] px-[40px]"
+              ? "max-1250:block max-1250:absolute top-full left-0 min-h-dvh w-full bg-white max-768:px-[20px] px-[40px]"
               : "hidden"
           }`}
         >
@@ -165,7 +165,7 @@ const Navbar = () => {
             })}
           </ul>
           {activeSubCategory && (
-            <ul className="hidden max-1250:block absolute top-0 bottom-0 right-0 left-0 bg-black gap-8 max-768:px-[20px] p-[40px]">
+            <ul className="hidden max-1250:block absolute top-0 bottom-0 right-0 left-0 bg-white gap-8 max-768:px-[20px] p-[40px]">
               <li className="pb-5">
                 <button
                   className="cursor-pointer p-2 border border-white rounded-full"
@@ -228,7 +228,7 @@ const Navbar = () => {
             />
           </div>
           <div className="hidden max-1250:flex items-center">
-            <button onClick={toggleNav} className="text-white">
+            <button onClick={toggleNav} className="text-black">
               {showNav ? <NavBarCloseIcon /> : <NavBarToggleIcon />}
             </button>
           </div>

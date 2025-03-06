@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 
 export default function NotFound() {
   return (
-    <div className="min-h-dvh flex flex-col bg-black text-white">
+    <div className="min-h-dvh flex flex-col bg-white text-black">
       <Navbar />
       <div className="flex-1 flex flex-col items-center justify-center text-center px-4 min-h-dvh">
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">

@@ -121,7 +121,7 @@ export default function ContactUs() {
   };
 
   return (
-    <section className="w-full bg-black text-white flex flex-col items-center justify-center">
+    <section className="w-full bg-white text-black flex flex-col items-center justify-center">
       <div className="w-full flex max-900:w-[90%] max-w-[1224px]  border border-[#e5e7eb36] rounded-3xl my-5 mt-[120px]">
         <div className="w-[40%] flex">
           <Image
@@ -144,7 +144,7 @@ export default function ContactUs() {
             We'd love to help. Contact us today.
           </p>
 
-          <div className="backdrop-blur-xs p-6 sm:p-8 max-900:px-2 rounded-lg shadow-lg w-full">
+          <div className="backdrop-blur-xs p-6 sm:p-8 max-900:px-2 rounded-lg w-full">
             <div className="flex flex-col md:flex-row gap-4">
               <Input
                 label={"Name"}
@@ -176,7 +176,7 @@ export default function ContactUs() {
             </div>
             <textarea
               onBlur={handleMessage}
-              className="w-full p-3 bg-[#e5e7eb1f] text-white border border-gray-700 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-white"
+              className="w-full p-3 bg-[#e5e7eb1f] text-black border border-gray-700 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-white"
               rows={5}
               placeholder="Your message..."
             ></textarea>

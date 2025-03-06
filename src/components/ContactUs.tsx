@@ -2,7 +2,7 @@ import Button from "./common/Button";
 
 const ContactUs = () => {
   return (
-    <section className="w-full max-768:px-[20px] px-[50px] relative text-white py-8 flex flex-col items-center justify-center mt-16 bg-[#3486dd10]">
+    <section className="w-full max-768:px-[20px] px-[50px] relative text-black py-8 flex flex-col items-center justify-center mt-16 bg-[#3486dd10]">
       <div className="w-full flex justify-between gap-8 text-center">
         <div className="">
           <p className="text-[20px] leading-[25px] max-1200:text-[16px] max-1200:leading-[21px] max-1030:text-[18px] font-bold">

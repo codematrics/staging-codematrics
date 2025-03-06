@@ -3,8 +3,11 @@ import Button from "@/components/common/Button";
 
 const TagLine = () => {
   return (
-    <section className="w-full bg-black min-1024:py-[260px] max-1024:min-768:py-[170px] max-768:py-[130px] relative text-white overflow-hidden">
-      <video
+    <section
+      style={{ backgroundPosition: "200% center" }}
+      className="w-full  min-1024:py-[260px] max-1024:min-768:py-[170px] max-768:py-[130px] relative text-black overflow-hidden"
+    >
+      {/* <video
         autoPlay
         loop
         muted
@@ -12,10 +15,10 @@ const TagLine = () => {
       >
         <source src="/assets/video/tagline-wave-bg.mp4" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
       <div className="w-full flex justify-center items-center relative z-[2]">
         <div className="text-center w-[60%] max-1500:w-[75%] max-1200:w-[80%] max-768:w-[90%] max-768:px-[40px] max-600:px-[20px]">
-          <h1 className="static text-[52px] leading-[57px] max-1200:text-[48px] max-1200:leading-[53px] max-1030:text-[40px] max-1030:leading-[45px] max-600:text-[35px] max-600:leading-[40px] max-420:text-[27px] max-420:leading-[32px] font-bold text-white">
+          <h1 className="static text-[52px] leading-[57px] max-1200:text-[48px] max-1200:leading-[53px] max-1030:text-[40px] max-1030:leading-[45px] max-600:text-[35px] max-600:leading-[40px] max-420:text-[27px] max-420:leading-[32px] font-bold text-black">
             The Only Partner You&apos;ll Need for Web, App, and Software
             Excellence.
           </h1>

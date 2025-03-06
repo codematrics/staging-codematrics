@@ -23,7 +23,7 @@ const Button: React.FC<Props> = ({
     return (
       <button
         onClick={onClick}
-        className={`bg-white text-black border-[1.5px] hover:text-white border-white overflow-hidden py-2.5 px-6 rounded-full transition-colors duration-1000 flex items-center gap-2 relative before:content-[''] before:absolute before:w-full before:h-full before:bg-black before:top-0 before:left-0 before:rounded-full before:pointer-events-none before:origin-[100%_50%] before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-100 hover:before:origin-[0%_50%] max-1200:py-2 max-1030:py-[10px] ${
+        className={`bg-white text-black border-[1px] hover:text-black border-[#00000033] overflow-hidden py-2.5 px-6 rounded-full transition-colors duration-1000 flex items-center gap-2 relative before:content-[''] before:absolute before:w-full before:h-full before:bg-[#0dcdfc] before:top-0 before:left-0 before:rounded-full before:pointer-events-none before:origin-[100%_50%] before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-100 hover:before:origin-[0%_50%] max-1200:py-2 max-1030:py-[10px] ${
           classes || ""
         }`}
       >
@@ -38,7 +38,7 @@ const Button: React.FC<Props> = ({
   return (
     <Link
       href={href || "#"}
-      className={`bg-white text-black border-[1.5px] hover:text-white border-white overflow-hidden py-2.5 px-6 rounded-full transition-colors duration-1000 flex items-center gap-2 relative before:content-[''] before:absolute before:w-full before:h-full before:bg-black before:top-0 before:left-0 before:rounded-full before:pointer-events-none before:origin-[100%_50%] before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-100 hover:before:origin-[0%_50%] max-1200:py-2 max-1030:py-[10px] ${
+      className={`bg-white text-black border-[1px] hover:text-black border-[#00000033] overflow-hidden py-2.5 px-6 rounded-full transition-colors duration-1000 flex items-center gap-2 relative before:content-[''] before:absolute before:w-full before:h-full before:bg-[#0dcdfc] before:top-0 before:left-0 before:rounded-full before:pointer-events-none before:origin-[100%_50%] before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-100 hover:before:origin-[0%_50%] max-1200:py-2 max-1030:py-[10px] ${
         classes || ""
       }`}
     >
