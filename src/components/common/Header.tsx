@@ -1,5 +1,4 @@
 'use client';
-import Logo from '@/../public/logo.png';
 import { Button } from '@/components/ui/button';
 import { ChevronUp, Menu, X } from 'lucide-react';
 import Image from 'next/image';
@@ -62,8 +61,10 @@ const Header = () => {
               className='flex items-center space-x-2 flex-shrink-0'
             >
               <Image
-                src={Logo}
+                src='/logo.png'
                 alt='CodeMatrics Logo'
+                width={40}
+                height={40}
                 className='h-8 w-8 lg:h-10 lg:w-10'
               />
               <span
