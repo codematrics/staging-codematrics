@@ -48,13 +48,13 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'hello@codematrics.com',
+      details: 'codematricsitsolution@gmail.com',
       description: 'Send us an email anytime!',
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+1 (555) 123-4567',
+      details: '+91 96649 20112',
       description: 'Mon-Fri from 8am to 5pm',
     },
   ];
@@ -330,7 +330,10 @@ const Contact = () => {
               Ready to transform your ideas into reality? Contact us today for a
               free consultation.
             </p>
-            <a href='mailto:hello@codematrics.com' className='inline-block'>
+            <a
+              href='mailto:codematricsitsolution@gmail.com'
+              className='inline-block'
+            >
               <Button
                 size='lg'
                 className='bg-white text-primary hover:bg-white/90 shadow-hero'

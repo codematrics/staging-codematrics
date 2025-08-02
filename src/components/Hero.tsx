@@ -12,7 +12,7 @@ const Hero = () => {
       <div className='absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl'></div>
       <div className='absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl'></div>
 
-      <div className='pb-4 container mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
+      <div className='pb-16 sm:pb-20 md:pb-24 container mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
           {/* Content */}
           <div className='text-center lg:text-left animate-fade-in-up'>
@@ -119,7 +119,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce'>
+      <div className='absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden sm:block'>
         <div className='w-6 h-10 border-2 border-white/50 rounded-full flex justify-center'>
           <div className='w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse'></div>
         </div>

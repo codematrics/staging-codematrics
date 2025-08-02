@@ -13,6 +13,11 @@ const Header = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const pathname = usePathname();
 
+  // Check if we're on a service or technology page where we want primary colors
+  const isServiceOrTechPage =
+    pathname.startsWith('/services/') || pathname.startsWith('/technologies/');
+  const shouldUsePrimaryColors = isScrolled || isServiceOrTechPage;
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -41,7 +46,7 @@ const Header = () => {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+          shouldUsePrimaryColors
             ? 'bg-background/95 backdrop-blur-md shadow-card'
             : 'bg-transparent text-white'
         }`}
@@ -60,8 +65,8 @@ const Header = () => {
               />
               <span
                 className={`text-lg lg:text-xl font-bold font-poppins ${
-                  isScrolled
-                    ? 'bg-gradient-primary bg-clip-text text-clip text-transparent'
+                  shouldUsePrimaryColors
+                    ? 'bg-gradient-primary bg-clip-text text-transparent'
                     : 'text-white'
                 }} whitespace-nowrap`}
               >
@@ -76,7 +81,11 @@ const Header = () => {
                   key={item.name}
                   href={item.href}
                   className={`text-sm font-medium transition-colors hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full whitespace-nowrap ${
-                    pathname === item.href ? 'text-primary after:w-full' : ''
+                    pathname === item.href
+                      ? 'text-primary after:w-full'
+                      : shouldUsePrimaryColors
+                        ? 'text-foreground'
+                        : 'text-current'
                   }`}
                 >
                   {item.name}
@@ -90,7 +99,7 @@ const Header = () => {
                 <Button
                   variant='outline'
                   size='sm'
-                  className={`border-blue-300/50 ${isScrolled ? 'text-primary' : 'text-white'} hover:text-white hover:bg-blue-500/20 backdrop-blur-sm group w-full sm:w-auto bg-transparent text-xs px-3`}
+                  className={`border-blue-300/50 ${shouldUsePrimaryColors ? 'text-primary' : 'text-white'} hover:text-white hover:bg-blue-500/20 backdrop-blur-sm group w-full sm:w-auto bg-transparent text-xs px-3`}
                 >
                   Get Quote
                 </Button>
@@ -108,7 +117,7 @@ const Header = () => {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className='lg:hidden p-2 rounded-md text-foreground hover:text-primary transition-colors'
+              className={`lg:hidden p-2 rounded-md ${shouldUsePrimaryColors ? 'text-primary' : 'text-white'} hover:text-primary transition-colors`}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -117,7 +126,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className='md:hidden bg-background border-t border-border'>
+          <div className='lg:hidden bg-background border-t border-border'>
             <div className='px-2 pt-2 pb-3 space-y-1'>
               {navigation.map(item => (
                 <Link
@@ -133,7 +142,7 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className='pt-4 space-y-2'>
+              <div className='pt-4 space-y-2 grid grid-cols-1 gap-1'>
                 <Link
                   href='/contact'
                   className='bg-transparent'
@@ -142,7 +151,7 @@ const Header = () => {
                   <Button
                     variant='outline'
                     size='sm'
-                    className='border-blue-300/50 text-white hover:bg-blue-500/20 backdrop-blur-sm group w-full sm:w-auto bg-transparent'
+                    className='border-blue-300/50 text-primary hover:bg-blue-500/20 backdrop-blur-sm group w-full sm:w-auto bg-transparent'
                   >
                     Get Quote
                   </Button>

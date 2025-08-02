@@ -1,14 +1,6 @@
 'use client';
 import Logo from '@/../public/logo.png';
-import {
-  Facebook,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Twitter,
-} from 'lucide-react';
+import { Facebook, Github, Linkedin, Mail, Phone, Twitter } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,16 +13,16 @@ const Footer = () => {
       { name: 'Contact', href: '/contact' },
     ],
     services: [
-      { name: 'Web Development', href: '/services' },
-      { name: 'Mobile Apps', href: '/services' },
-      { name: 'Backend Development', href: '/services' },
-      { name: 'UI/UX Design', href: '/services' },
+      { name: 'Web Development', href: '/services/web-development' },
+      { name: 'Mobile Apps', href: '/services/mobile-apps' },
+      { name: 'Backend Development', href: '/services/backend-development' },
+      { name: 'UI/UX Design', href: '/services/ui-ux-design' },
     ],
     technologies: [
-      { name: 'React & Vue', href: '/technologies' },
-      { name: 'Node.js & PHP', href: '/technologies' },
-      { name: 'Mobile Development', href: '/technologies' },
-      { name: 'Database Solutions', href: '/technologies' },
+      { name: 'React & Vue', href: '/technologies/react-vue' },
+      { name: 'Node.js & PHP', href: '/technologies/node-php' },
+      { name: 'Mobile Development', href: '/technologies/mobile-development' },
+      { name: 'Database Solutions', href: '/technologies/database-solutions' },
     ],
   };
 
@@ -64,15 +56,11 @@ const Footer = () => {
               <div className='space-y-3'>
                 <div className='flex items-center text-sm text-muted-foreground'>
                   <Mail size={16} className='mr-3 text-primary' />
-                  hello@codematrics.com
+                  codematricsitsolution@gmail.com
                 </div>
                 <div className='flex items-center text-sm text-muted-foreground'>
                   <Phone size={16} className='mr-3 text-primary' />
-                  +1 (555) 123-4567
-                </div>
-                <div className='flex items-center text-sm text-muted-foreground'>
-                  <MapPin size={16} className='mr-3 text-primary' />
-                  123 Tech Street, Silicon Valley
+                  +91 96649 20112
                 </div>
               </div>
             </div>
