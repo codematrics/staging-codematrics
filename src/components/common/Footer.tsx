@@ -1,5 +1,4 @@
 'use client';
-import Logo from '@/../public/logo.png';
 import { Facebook, Github, Linkedin, Mail, Phone, Twitter } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -42,7 +41,13 @@ const Footer = () => {
             {/* Company Info */}
             <div className='lg:col-span-1'>
               <div className='flex items-center space-x-2 mb-4'>
-                <Image src={Logo} alt='CodeMatrics Logo' className='h-8 w-8' />
+                <Image
+                  src='/logo.png'
+                  alt='CodeMatrics Logo'
+                  width={32}
+                  height={32}
+                  className='h-8 w-8'
+                />
                 <span className='text-xl font-bold font-poppins text-primary'>
                   CodeMatrics
                 </span>

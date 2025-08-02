@@ -1,4 +1,3 @@
-import Logo from '@/../public/logo.png';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Globe, Play, Smartphone } from 'lucide-react';
 import Image from 'next/image';
@@ -108,8 +107,10 @@ const Hero = () => {
               {/* Central Element */}
               <div className='mx-auto w-64 h-64 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/20 flex items-center justify-center'>
                 <Image
-                  src={Logo}
+                  src='/logo.png'
                   alt='CodeMatrics'
+                  width={96}
+                  height={96}
                   className='w-24 h-24 opacity-80'
                 />
               </div>
