@@ -23,7 +23,14 @@ export async function GET(request: NextRequest) {
     const db = await getDatabase();
 
     // Build query
-    const query: any = { status };
+    const query: {
+      status: string;
+      category?: string;
+      featured?: boolean;
+      [key: string]: unknown;
+    } = {
+      status,
+    };
 
     if (category && category !== 'all') {
       query.category = category;
@@ -67,8 +74,7 @@ export async function GET(request: NextRequest) {
         hasPreviousPage: page > 1,
       },
     });
-  } catch (error) {
-    console.error('Projects API error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to fetch projects' },
       { status: 500 }
@@ -123,8 +129,7 @@ export async function POST(request: NextRequest) {
       message: 'Project created successfully',
       project: { ...newProject, _id: result.insertedId },
     });
-  } catch (error) {
-    console.error('Create project error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to create project' },
       { status: 500 }

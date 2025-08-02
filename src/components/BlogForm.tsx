@@ -78,15 +78,18 @@ export default function BlogForm({
     if (formData.title && !formData.metaTitle) {
       setFormData(prev => ({ ...prev, metaTitle: prev.title }));
     }
-  }, [formData.title]);
+  }, [formData.title, formData.metaTitle]);
 
   useEffect(() => {
     if (formData.excerpt && !formData.metaDescription) {
       setFormData(prev => ({ ...prev, metaDescription: prev.excerpt }));
     }
-  }, [formData.excerpt]);
+  }, [formData.excerpt, formData.metaDescription]);
 
-  const handleInputChange = (field: keyof BlogFormData, value: any) => {
+  const handleInputChange = (
+    field: keyof BlogFormData,
+    value: BlogFormData[keyof BlogFormData]
+  ) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 

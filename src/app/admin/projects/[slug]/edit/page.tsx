@@ -34,11 +34,8 @@ const EditProjectPage = () => {
 
         if (response.ok) {
           setProject(data);
-        } else {
-          console.error('Failed to fetch project');
         }
-      } catch (error) {
-        console.error('Error fetching project:', error);
+      } catch {
       } finally {
         setLoading(false);
       }

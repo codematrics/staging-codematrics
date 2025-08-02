@@ -23,8 +23,7 @@ export async function GET(
     await db.collection('projects').updateOne({ slug }, { $inc: { views: 1 } });
 
     return NextResponse.json(project);
-  } catch (error) {
-    console.error('Get project error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to fetch project' },
       { status: 500 }
@@ -88,8 +87,7 @@ export async function PUT(
       message: 'Project updated successfully',
       project: updatedProject,
     });
-  } catch (error) {
-    console.error('Update project error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to update project' },
       { status: 500 }
@@ -112,8 +110,7 @@ export async function DELETE(
     }
 
     return NextResponse.json({ message: 'Project deleted successfully' });
-  } catch (error) {
-    console.error('Delete project error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to delete project' },
       { status: 500 }

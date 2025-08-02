@@ -57,9 +57,8 @@ export default function AdminDashboard() {
 
       const data = await response.json();
       setAnalytics(data);
-    } catch (err) {
+    } catch {
       setError('Failed to load analytics data');
-      console.error('Analytics fetch error:', err);
     } finally {
       setLoading(false);
     }
@@ -281,7 +280,7 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className='space-y-4'>
-                {analytics.blogVisitors.map((blog, index) => (
+                {analytics.blogVisitors.map(blog => (
                   <div
                     key={blog.blogId}
                     className='flex items-center justify-between p-4 border rounded-lg'

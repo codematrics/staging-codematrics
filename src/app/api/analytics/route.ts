@@ -62,8 +62,7 @@ export async function GET() {
     };
 
     return NextResponse.json(stats);
-  } catch (error) {
-    console.error('Error fetching analytics:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to fetch analytics' },
       { status: 500 }
@@ -106,8 +105,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('Error updating analytics:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to update analytics' },
       { status: 500 }

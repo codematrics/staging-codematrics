@@ -25,9 +25,7 @@ export function useAnalytics() {
             page: pathname,
           }),
         });
-      } catch (error) {
-        console.error('Analytics tracking error:', error);
-      }
+      } catch {}
     };
 
     trackVisit();
@@ -46,9 +44,7 @@ export function useAnalytics() {
           page: title,
         }),
       });
-    } catch (error) {
-      console.error('Blog analytics tracking error:', error);
-    }
+    } catch {}
   };
 
   return { trackBlogVisit };

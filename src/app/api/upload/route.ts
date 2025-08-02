@@ -51,14 +51,16 @@ export async function POST(request: NextRequest) {
         .end(buffer);
     });
 
-    const uploadResult = result as any;
+    const uploadResult = result as {
+      secure_url: string;
+      public_id: string;
+    };
 
     return NextResponse.json({
       url: uploadResult.secure_url,
       publicId: uploadResult.public_id,
     });
-  } catch (error) {
-    console.error('Upload error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to upload image' },
       { status: 500 }
@@ -81,8 +83,7 @@ export async function DELETE(request: NextRequest) {
     await cloudinary.uploader.destroy(publicId);
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('Delete error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to delete image' },
       { status: 500 }

@@ -89,8 +89,7 @@ export async function POST(request: NextRequest) {
       { message: 'Blog post created successfully', id: result.insertedId },
       { status: 201 }
     );
-  } catch (error) {
-    console.error('Error creating blog post:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
