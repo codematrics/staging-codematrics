@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { CheckCircle, Mail, Phone, Send } from 'lucide-react';
 import { useState } from 'react';
 
@@ -13,10 +13,12 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    company: '',
     subject: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,16 +34,50 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: 'Message Sent Successfully!',
-        description:
-          "Thank you for contacting us. We'll get back to you within 24 hours.",
+    // Show loading toast
+    const loadingToast = toast({
+      title: 'Sending Message...',
+      description: 'Please wait while we process your request.',
+    });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+
+      if (response.ok) {
+        loadingToast.dismiss();
+        toast({
+          title: 'Message Sent Successfully!',
+          description:
+            "Thank you for contacting us. We'll get back to you within 24 hours.",
+        });
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send message');
+      }
+    } catch (error) {
+      loadingToast.dismiss();
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error occurred';
+      toast({
+        title: 'Error Sending Message',
+        description: `There was a problem sending your message: ${errorMessage}. Please try again later.`,
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+    }
   };
 
   const contactInfo = [
@@ -133,18 +169,32 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor='subject'>Subject *</Label>
-                  <Input
-                    id='subject'
-                    name='subject'
-                    type='text'
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    className='mt-2'
-                    placeholder='Project Inquiry'
-                  />
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+                  <div>
+                    <Label htmlFor='company'>Company</Label>
+                    <Input
+                      id='company'
+                      name='company'
+                      type='text'
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className='mt-2'
+                      placeholder='Your Company'
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor='subject'>Subject *</Label>
+                    <Input
+                      id='subject'
+                      name='subject'
+                      type='text'
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      required
+                      className='mt-2'
+                      placeholder='Project Inquiry'
+                    />
+                  </div>
                 </div>
 
                 <div>
