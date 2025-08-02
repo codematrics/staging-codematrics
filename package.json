@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run clean && next build",
+    "build": "next build",
     "clean": "rm -rf .next node_modules package-lock.json && npm install",
     "start": "next start",
     "lint": "next lint",
@@ -18,8 +18,7 @@
     "build:check": "next build --no-lint",
     "pre-commit-check": "npm run format:check && npm run lint",
     "pre-push-check": "npm run format:check && npm run lint && npm run type-check && npm run build",
-    "validate": "scripts\\validate.bat",
-    "prepare": "husky"
+    "validate": "scripts\\validate.bat"
   },
   "dependencies": {
     "@cloudinary/react": "^1.14.3",
