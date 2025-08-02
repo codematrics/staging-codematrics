@@ -7,8 +7,4 @@ echo "🔍 Running pre-commit checks..."
 echo "📝 Checking formatting and linting..."
 npx lint-staged
 
-# Run build check to ensure code compiles
-echo "🏗️  Running build check..."
-npm run build:check
-
 echo "✅ All pre-commit checks passed!"

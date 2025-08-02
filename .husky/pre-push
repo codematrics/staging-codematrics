@@ -15,7 +15,7 @@ npm run lint
 echo "🔷 Running TypeScript type check..."
 npm run type-check
 
-# Run full build
+# Run full build to ensure everything compiles correctly
 echo "🏗️  Running production build..."
 npm run build
 
