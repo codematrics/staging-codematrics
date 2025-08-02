@@ -1,3 +1,4 @@
+import { checkAdminAuth } from '@/lib/auth';
 import { getDatabase } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
@@ -55,23 +56,71 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    // Simple authentication check (you can enhance this)
-    const authHeader = request.headers.get('authorization');
-    const isAdmin = authHeader === 'Bearer admin-token-123'; // Change this to a secure token
+    // Check admin authentication using cookie
+    const isAuthenticated = await checkAdminAuth();
 
-    if (!isAdmin) {
+    if (!isAuthenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Get pagination parameters from URL
+    const { searchParams } = new URL(request.url);
+    const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
+    const limit = Math.min(
+      50,
+      Math.max(1, parseInt(searchParams.get('limit') || '10'))
+    );
+    const search = searchParams.get('search') || '';
+
+    // Calculate skip value for pagination
+    const skip = (page - 1) * limit;
+
+    // Build search query
+    const searchQuery = search
+      ? {
+          $or: [
+            { name: { $regex: search, $options: 'i' } },
+            { email: { $regex: search, $options: 'i' } },
+            { subject: { $regex: search, $options: 'i' } },
+            { message: { $regex: search, $options: 'i' } },
+            { company: { $regex: search, $options: 'i' } },
+          ],
+        }
+      : {};
+
     // Get inquiries from MongoDB
     const db = await getDatabase();
+
+    // Get total count for pagination
+    const totalCount = await db
+      .collection('inquiries')
+      .countDocuments(searchQuery);
+
+    // Get paginated inquiries
     const inquiries = await db
       .collection('inquiries')
-      .find({})
+      .find(searchQuery)
       .sort({ timestamp: -1 })
+      .skip(skip)
+      .limit(limit)
       .toArray();
 
-    return NextResponse.json(inquiries);
+    // Calculate pagination metadata
+    const totalPages = Math.ceil(totalCount / limit);
+    const hasNextPage = page < totalPages;
+    const hasPreviousPage = page > 1;
+
+    return NextResponse.json({
+      data: inquiries,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalCount,
+        hasNextPage,
+        hasPreviousPage,
+        limit,
+      },
+    });
   } catch {
     return NextResponse.json(
       { error: 'Internal server error' },

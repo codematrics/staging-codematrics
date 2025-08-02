@@ -14,9 +14,11 @@ const Header = () => {
   const pathname = usePathname();
 
   // Check if we're on a service or technology page where we want primary colors
-  const isServiceOrTechPage =
-    pathname.startsWith('/services/') || pathname.startsWith('/technologies/');
-  const shouldUsePrimaryColors = isScrolled || isServiceOrTechPage;
+  const isServiceOrTechOrBlogPage =
+    pathname.startsWith('/services/') ||
+    pathname.startsWith('/technologies/') ||
+    pathname.startsWith('/blog');
+  const shouldUsePrimaryColors = isScrolled || isServiceOrTechOrBlogPage;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +41,7 @@ const Header = () => {
     { name: 'Services', href: '/services' },
     { name: 'Technologies', href: '/technologies' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -68,7 +71,7 @@ const Header = () => {
                   shouldUsePrimaryColors
                     ? 'bg-gradient-primary bg-clip-text text-transparent'
                     : 'text-white'
-                }} whitespace-nowrap`}
+                } whitespace-nowrap`}
               >
                 CodeMatrics
               </span>

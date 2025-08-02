@@ -1,3 +1,4 @@
+import BlogSection from '@/components/BlogSection';
 import Hero from '@/components/Hero';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,7 +14,24 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-const Home = () => {
+const Home = async () => {
+  // Fetch latest blog posts
+  let blogPosts = [];
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/blogs?status=published&limit=3`,
+      {
+        next: { revalidate: 3600 }, // Revalidate every hour
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      blogPosts = data.blogs || [];
+    }
+  } catch {
+    // Silently fail if blog fetch fails
+  }
   const services = [
     {
       icon: Palette,
@@ -284,6 +302,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Blog Section */}
+      <BlogSection posts={blogPosts} />
 
       {/* CTA Section */}
       <section className='py-12 sm:py-16 md:py-20 lg:py-24 bg-background'>

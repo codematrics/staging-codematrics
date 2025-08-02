@@ -10,32 +10,43 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { toast } from '@/hooks/use-toast';
 import {
-  Briefcase,
   Calendar,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
   Download,
+  Edit,
   Eye,
-  Mail,
+  Plus,
   RefreshCw,
   Search,
+  Trash2,
   User,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-interface Inquiry {
+interface Blog {
   _id: string;
-  name: string;
-  email: string;
-  company?: string;
-  subject: string;
-  message: string;
-  timestamp: string;
-  status?: 'new' | 'read' | 'replied';
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  author: string;
+  status: 'draft' | 'published' | 'archived';
+  category: string;
+  tags: string[];
+  featuredImage?: string;
+  publishedDate?: string;
+  createdAt: string;
+  updatedAt: string;
+  views: number;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string[];
 }
 
 interface PaginationInfo {
@@ -47,11 +58,11 @@ interface PaginationInfo {
   limit: number;
 }
 
-export default function AdminInquiries() {
-  const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+export default function AdminBlogs() {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
+  const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -68,7 +79,7 @@ export default function AdminInquiries() {
   const router = useRouter();
   const hasInitialLoaded = useRef(false);
 
-  const fetchInquiries = useCallback(
+  const fetchBlogs = useCallback(
     async (page: number, search: string) => {
       try {
         setLoading(true);
@@ -78,7 +89,7 @@ export default function AdminInquiries() {
           ...(search && { search }),
         });
 
-        const response = await fetch(`/api/contact?${params.toString()}`);
+        const response = await fetch(`/api/blogs?${params.toString()}`);
 
         if (response.status === 401) {
           router.push('/admin/login');
@@ -86,19 +97,17 @@ export default function AdminInquiries() {
         }
 
         if (!response.ok) {
-          throw new Error('Failed to fetch inquiries');
+          throw new Error('Failed to fetch blogs');
         }
 
         const result = await response.json();
 
-        // Handle both old format (direct array) and new format (with pagination)
         if (result.data && result.pagination) {
-          setInquiries(result.data);
+          setBlogs(result.data);
           setPagination(result.pagination);
           setCurrentPage(result.pagination.currentPage);
         } else {
-          // Fallback for old format
-          setInquiries(result);
+          setBlogs(result);
           setPagination({
             currentPage: page,
             totalPages: 1,
@@ -109,7 +118,7 @@ export default function AdminInquiries() {
           });
         }
       } catch {
-        setError('Failed to load inquiries');
+        setError('Failed to load blogs');
       } finally {
         setLoading(false);
       }
@@ -126,7 +135,7 @@ export default function AdminInquiries() {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
       setIsSearching(false);
-    }, 500); // 500ms delay
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [searchTerm, debouncedSearchTerm]);
@@ -135,70 +144,64 @@ export default function AdminInquiries() {
   useEffect(() => {
     if (!hasInitialLoaded.current && debouncedSearchTerm === '') {
       hasInitialLoaded.current = true;
-      fetchInquiries(1, '');
+      fetchBlogs(1, '');
     }
-  }, [fetchInquiries, debouncedSearchTerm]);
+  }, [fetchBlogs, debouncedSearchTerm]);
 
-  // Fetch inquiries when debounced search term changes
+  // Fetch blogs when debounced search term changes
   useEffect(() => {
-    // Skip initial load (handled above)
     if (!hasInitialLoaded.current) return;
 
-    // Reset to first page when search changes
     const newPage = 1;
     setCurrentPage(newPage);
-    fetchInquiries(newPage, debouncedSearchTerm);
-  }, [debouncedSearchTerm, fetchInquiries]);
+    fetchBlogs(newPage, debouncedSearchTerm);
+  }, [debouncedSearchTerm, fetchBlogs]);
 
   // Handle page changes
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    fetchInquiries(page, debouncedSearchTerm);
+    fetchBlogs(page, debouncedSearchTerm);
   };
 
-  // Handle search changes (just update the input value, debouncing will handle the API call)
+  // Handle search changes
   const handleSearchChange = (search: string) => {
     setSearchTerm(search);
   };
 
   // Refresh function for buttons
   const handleRefresh = useCallback(() => {
-    fetchInquiries(currentPage, debouncedSearchTerm);
-  }, [fetchInquiries, currentPage, debouncedSearchTerm]);
+    fetchBlogs(currentPage, debouncedSearchTerm);
+  }, [fetchBlogs, currentPage, debouncedSearchTerm]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
     });
   };
 
   const exportToCSV = () => {
     const headers = [
       'ID',
-      'Name',
-      'Email',
-      'Company',
-      'Subject',
-      'Message',
+      'Title',
+      'Author',
       'Status',
-      'Timestamp',
+      'Category',
+      'Views',
+      'Published Date',
     ];
     const csvContent = [
       headers.join(','),
-      ...inquiries.map(inquiry =>
+      ...blogs.map(blog =>
         [
-          inquiry._id,
-          `"${inquiry.name}"`,
-          inquiry.email,
-          inquiry.company || '',
-          `"${inquiry.subject}"`,
-          `"${inquiry.message.replace(/"/g, '""')}"`,
-          inquiry.status || 'new',
-          inquiry.timestamp,
+          blog._id,
+          `"${blog.title}"`,
+          blog.author,
+          blog.status,
+          blog.category,
+          blog.views,
+          blog.publishedDate || blog.createdAt,
         ].join(',')
       ),
     ].join('\n');
@@ -207,18 +210,45 @@ export default function AdminInquiries() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `inquiries-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `blogs-${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
     window.URL.revokeObjectURL(url);
   };
 
-  const openInquiryModal = (inquiry: Inquiry) => {
-    setSelectedInquiry(inquiry);
+  const handleDeleteBlog = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this blog?')) return;
+
+    try {
+      const response = await fetch(`/api/blogs/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete blog');
+      }
+
+      toast({
+        title: 'Success',
+        description: 'Blog deleted successfully',
+      });
+
+      // Refresh the list
+      handleRefresh();
+    } catch {
+      toast({
+        title: 'Error',
+        description: 'Failed to delete blog',
+      });
+    }
+  };
+
+  const openBlogModal = (blog: Blog) => {
+    setSelectedBlog(blog);
     setIsModalOpen(true);
   };
 
-  const closeInquiryModal = () => {
-    setSelectedInquiry(null);
+  const closeBlogModal = () => {
+    setSelectedBlog(null);
     setIsModalOpen(false);
   };
 
@@ -226,11 +256,9 @@ export default function AdminInquiries() {
     return (
       <div className='min-h-screen bg-background p-4 sm:p-6 lg:p-8'>
         <div className='container mx-auto max-w-7xl'>
-          <div className='flex items-center justify-center h-64'>
-            <div className='text-center'>
-              <p className='text-red-500 mb-4'>{error}</p>
-              <Button onClick={handleRefresh}>Try Again</Button>
-            </div>
+          <div className='text-center py-12'>
+            <p className='text-destructive mb-4'>{error}</p>
+            <Button onClick={handleRefresh}>Try Again</Button>
           </div>
         </div>
       </div>
@@ -245,9 +273,9 @@ export default function AdminInquiries() {
           <CardHeader>
             <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
               <div>
-                <CardTitle className='text-2xl'>Contact Inquiries</CardTitle>
+                <CardTitle className='text-2xl'>Blog Management</CardTitle>
                 <p className='text-muted-foreground'>
-                  Manage and review customer inquiries
+                  Create and manage blog posts
                 </p>
               </div>
               <div className='flex items-center gap-2'>
@@ -271,6 +299,13 @@ export default function AdminInquiries() {
                   <Download className='h-4 w-4' />
                   Export CSV
                 </Button>
+                <Button
+                  onClick={() => router.push('/admin/blogs/new')}
+                  className='flex items-center gap-2'
+                >
+                  <Plus className='h-4 w-4' />
+                  New Blog
+                </Button>
               </div>
             </div>
           </CardHeader>
@@ -279,7 +314,7 @@ export default function AdminInquiries() {
             <div className='relative mb-4'>
               <Search className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
               <Input
-                placeholder='Search by name, email, subject, or message...'
+                placeholder='Search by title, author, category, or content...'
                 value={searchTerm}
                 onChange={e => handleSearchChange(e.target.value)}
                 className='pl-10 pr-10'
@@ -294,12 +329,12 @@ export default function AdminInquiries() {
               <table className='w-full'>
                 <thead>
                   <tr className='border-b'>
-                    <th className='text-left p-3 font-medium'>Name</th>
-                    <th className='text-left p-3 font-medium'>Email</th>
-                    <th className='text-left p-3 font-medium'>Subject</th>
-                    <th className='text-left p-3 font-medium'>Message</th>
-                    <th className='text-left p-3 font-medium'>Date</th>
+                    <th className='text-left p-3 font-medium'>Title</th>
+                    <th className='text-left p-3 font-medium'>Author</th>
+                    <th className='text-left p-3 font-medium'>Category</th>
                     <th className='text-left p-3 font-medium'>Status</th>
+                    <th className='text-left p-3 font-medium'>Published</th>
+                    <th className='text-left p-3 font-medium'>Views</th>
                     <th className='text-left p-3 font-medium'>Actions</th>
                   </tr>
                 </thead>
@@ -311,82 +346,69 @@ export default function AdminInquiries() {
                         className='text-center p-8 text-muted-foreground'
                       >
                         <RefreshCw className='animate-spin h-6 w-6 mx-auto mb-2' />
-                        Loading inquiries...
+                        Loading blogs...
                       </td>
                     </tr>
-                  ) : inquiries.length === 0 ? (
+                  ) : blogs.length === 0 ? (
                     <tr>
                       <td
                         colSpan={7}
                         className='text-center p-8 text-muted-foreground'
                       >
-                        No inquiries found
+                        No blogs found
                       </td>
                     </tr>
                   ) : (
-                    inquiries.map(inquiry => (
+                    blogs.map(blog => (
                       <tr
-                        key={inquiry._id}
+                        key={blog._id}
                         className='border-b hover:bg-accent/50'
                       >
                         <td className='p-3'>
                           <div className='space-y-1'>
-                            <div className='flex items-center gap-2'>
-                              <User className='h-4 w-4 text-primary' />
-                              <span className='font-medium'>
-                                {inquiry.name}
-                              </span>
+                            <div className='font-medium'>{blog.title}</div>
+                            <div className='text-sm text-muted-foreground line-clamp-2'>
+                              {blog.excerpt}
                             </div>
-                            {inquiry.company && (
-                              <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-                                <Briefcase className='h-3 w-3' />
-                                <span>{inquiry.company}</span>
-                              </div>
-                            )}
                           </div>
                         </td>
                         <td className='p-3'>
                           <div className='flex items-center gap-2 text-sm'>
-                            <Mail className='h-3 w-3 text-primary' />
-                            <a
-                              href={`mailto:${inquiry.email}`}
-                              className='text-primary hover:underline'
-                            >
-                              {inquiry.email}
-                            </a>
+                            <User className='h-3 w-3 text-primary' />
+                            <span>{blog.author}</span>
                           </div>
                         </td>
                         <td className='p-3'>
-                          <div className='max-w-xs'>
-                            <span className='font-medium text-sm text-primary line-clamp-2'>
-                              {inquiry.subject}
-                            </span>
-                          </div>
-                        </td>
-                        <td className='p-3'>
-                          <div className='max-w-xs'>
-                            <span className='text-sm text-muted-foreground line-clamp-2'>
-                              {inquiry.message}
-                            </span>
-                          </div>
-                        </td>
-                        <td className='p-3'>
-                          <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-                            <Calendar className='h-3 w-3' />
-                            <span>{formatDate(inquiry.timestamp)}</span>
-                          </div>
+                          <span className='px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs'>
+                            {blog.category}
+                          </span>
                         </td>
                         <td className='p-3'>
                           <span
                             className={`inline-block px-2 py-1 rounded-full text-xs ${
-                              inquiry.status === 'replied'
+                              blog.status === 'published'
                                 ? 'bg-green-100 text-green-700'
-                                : inquiry.status === 'read'
-                                  ? 'bg-blue-100 text-blue-700'
+                                : blog.status === 'draft'
+                                  ? 'bg-yellow-100 text-yellow-700'
                                   : 'bg-gray-100 text-gray-700'
                             }`}
                           >
-                            {inquiry.status || 'new'}
+                            {blog.status}
+                          </span>
+                        </td>
+                        <td className='p-3'>
+                          <div className='flex items-center gap-2 text-sm text-muted-foreground'>
+                            <Calendar className='h-3 w-3' />
+                            <span>
+                              {blog.publishedDate
+                                ? formatDate(blog.publishedDate)
+                                : 'Not published'}
+                            </span>
+                          </div>
+                        </td>
+                        <td className='p-3'>
+                          <span className='text-sm'>
+                            {blog.views.toLocaleString()}
                           </span>
                         </td>
                         <td className='p-3'>
@@ -394,11 +416,31 @@ export default function AdminInquiries() {
                             <Button
                               variant='outline'
                               size='sm'
-                              onClick={() => openInquiryModal(inquiry)}
+                              onClick={() => openBlogModal(blog)}
                               className='flex items-center gap-1'
                             >
                               <Eye className='h-3 w-3' />
                               View
+                            </Button>
+                            <Button
+                              variant='outline'
+                              size='sm'
+                              onClick={() =>
+                                router.push(`/admin/blogs/${blog._id}/edit`)
+                              }
+                              className='flex items-center gap-1'
+                            >
+                              <Edit className='h-3 w-3' />
+                              Edit
+                            </Button>
+                            <Button
+                              variant='destructive'
+                              size='sm'
+                              onClick={() => handleDeleteBlog(blog._id)}
+                              className='flex items-center gap-1'
+                            >
+                              <Trash2 className='h-3 w-3' />
+                              Delete
                             </Button>
                           </div>
                         </td>
@@ -410,7 +452,7 @@ export default function AdminInquiries() {
             </div>
 
             {/* Pagination */}
-            {!loading && inquiries.length > 0 && (
+            {!loading && blogs.length > 0 && (
               <div className='flex items-center justify-between mt-6'>
                 <div className='text-sm text-muted-foreground'>
                   Showing {(pagination.currentPage - 1) * pagination.limit + 1}{' '}
@@ -419,7 +461,7 @@ export default function AdminInquiries() {
                     pagination.currentPage * pagination.limit,
                     pagination.totalCount
                   )}{' '}
-                  of {pagination.totalCount} inquiries
+                  of {pagination.totalCount} blogs
                 </div>
 
                 <div className='flex items-center gap-2'>
@@ -466,133 +508,140 @@ export default function AdminInquiries() {
           </CardContent>
         </Card>
 
-        {/* Inquiry Details Modal */}
+        {/* Blog Details Modal */}
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className='max-w-2xl max-h-[80vh] overflow-y-auto'>
+          <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto'>
             <DialogHeader>
               <DialogTitle className='flex items-center gap-2'>
                 <User className='h-5 w-5 text-primary' />
-                Inquiry Details
+                Blog Details
               </DialogTitle>
               <DialogDescription>
-                Complete information about this customer inquiry
+                Complete information about this blog post
               </DialogDescription>
             </DialogHeader>
 
-            {selectedInquiry && (
+            {selectedBlog && (
               <div className='space-y-6'>
-                {/* Contact Information */}
+                {/* Header Info */}
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                   <div className='space-y-2'>
                     <label className='text-sm font-medium text-muted-foreground'>
-                      Name
+                      Title
+                    </label>
+                    <h3 className='font-semibold text-lg'>
+                      {selectedBlog.title}
+                    </h3>
+                  </div>
+
+                  <div className='space-y-2'>
+                    <label className='text-sm font-medium text-muted-foreground'>
+                      Author
                     </label>
                     <div className='flex items-center gap-2'>
                       <User className='h-4 w-4 text-primary' />
-                      <span className='font-medium'>
-                        {selectedInquiry.name}
-                      </span>
+                      <span>{selectedBlog.author}</span>
                     </div>
                   </div>
 
                   <div className='space-y-2'>
                     <label className='text-sm font-medium text-muted-foreground'>
-                      Email
+                      Category
                     </label>
-                    <div className='flex items-center gap-2'>
-                      <Mail className='h-4 w-4 text-primary' />
-                      <a
-                        href={`mailto:${selectedInquiry.email}`}
-                        className='text-primary hover:underline'
-                      >
-                        {selectedInquiry.email}
-                      </a>
-                    </div>
+                    <span className='px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs'>
+                      {selectedBlog.category}
+                    </span>
                   </div>
-
-                  {selectedInquiry.company && (
-                    <div className='space-y-2'>
-                      <label className='text-sm font-medium text-muted-foreground'>
-                        Company
-                      </label>
-                      <div className='flex items-center gap-2'>
-                        <Briefcase className='h-4 w-4 text-primary' />
-                        <span>{selectedInquiry.company}</span>
-                      </div>
-                    </div>
-                  )}
 
                   <div className='space-y-2'>
                     <label className='text-sm font-medium text-muted-foreground'>
-                      Date
+                      Status
                     </label>
-                    <div className='flex items-center gap-2'>
-                      <Calendar className='h-4 w-4 text-primary' />
-                      <span>{formatDate(selectedInquiry.timestamp)}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Subject */}
-                <div className='space-y-2'>
-                  <label className='text-sm font-medium text-muted-foreground'>
-                    Subject
-                  </label>
-                  <div className='p-3 bg-primary/5 border border-primary/20 rounded-lg'>
-                    <span className='font-medium text-primary'>
-                      {selectedInquiry.subject}
+                    <span
+                      className={`inline-block px-2 py-1 rounded-full text-xs ${
+                        selectedBlog.status === 'published'
+                          ? 'bg-green-100 text-green-700'
+                          : selectedBlog.status === 'draft'
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : 'bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      {selectedBlog.status}
                     </span>
                   </div>
                 </div>
 
-                {/* Message */}
+                {/* Excerpt */}
                 <div className='space-y-2'>
                   <label className='text-sm font-medium text-muted-foreground'>
-                    Message
+                    Excerpt
                   </label>
-                  <div className='p-4 bg-accent/50 border rounded-lg'>
-                    <p className='text-sm leading-relaxed whitespace-pre-wrap'>
-                      {selectedInquiry.message}
-                    </p>
-                  </div>
+                  <p className='text-sm leading-relaxed'>
+                    {selectedBlog.excerpt}
+                  </p>
                 </div>
 
-                {/* Status */}
+                {/* Content */}
                 <div className='space-y-2'>
                   <label className='text-sm font-medium text-muted-foreground'>
-                    Status
+                    Content
                   </label>
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-sm ${
-                      selectedInquiry.status === 'replied'
-                        ? 'bg-green-100 text-green-700'
-                        : selectedInquiry.status === 'read'
-                          ? 'bg-blue-100 text-blue-700'
-                          : 'bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    {selectedInquiry.status || 'new'}
-                  </span>
+                  <div
+                    className='prose prose-sm max-w-none p-4 bg-accent/20 border rounded-lg'
+                    dangerouslySetInnerHTML={{ __html: selectedBlog.content }}
+                  />
+                </div>
+
+                {/* Meta Information */}
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t'>
+                  <div className='space-y-2'>
+                    <label className='text-sm font-medium text-muted-foreground'>
+                      Views
+                    </label>
+                    <span className='font-medium'>
+                      {selectedBlog.views.toLocaleString()}
+                    </span>
+                  </div>
+
+                  <div className='space-y-2'>
+                    <label className='text-sm font-medium text-muted-foreground'>
+                      Published Date
+                    </label>
+                    <div className='flex items-center gap-2'>
+                      <Calendar className='h-4 w-4 text-primary' />
+                      <span>
+                        {selectedBlog.publishedDate
+                          ? formatDate(selectedBlog.publishedDate)
+                          : 'Not published'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Actions */}
                 <div className='flex gap-3 pt-4 border-t'>
                   <Button
-                    onClick={() =>
-                      window.open(
-                        `mailto:${selectedInquiry.email}?subject=Re: ${selectedInquiry.subject}&body=Hello ${selectedInquiry.name},%0D%0A%0D%0AThank you for your inquiry about ${selectedInquiry.subject}.%0D%0A%0D%0A`
-                      )
-                    }
+                    onClick={() => {
+                      window.open(`/blog/${selectedBlog.slug}`, '_blank');
+                    }}
                     className='flex items-center gap-2'
+                    disabled={selectedBlog.status !== 'published'}
                   >
-                    <Mail className='h-4 w-4' />
-                    Reply via Email
+                    <Eye className='h-4 w-4' />
+                    View Live
                   </Button>
                   <Button
                     variant='outline'
-                    onClick={closeInquiryModal}
+                    onClick={() => {
+                      router.push(`/admin/blogs/${selectedBlog._id}/edit`);
+                      closeBlogModal();
+                    }}
                     className='flex items-center gap-2'
                   >
+                    <Edit className='h-4 w-4' />
+                    Edit Blog
+                  </Button>
+                  <Button variant='outline' onClick={closeBlogModal}>
                     Close
                   </Button>
                 </div>
