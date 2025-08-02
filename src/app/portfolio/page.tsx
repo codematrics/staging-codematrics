@@ -12,7 +12,7 @@ interface Project {
   slug: string;
   description: string;
   content: string;
-  imageUrl?: string;
+  image?: string;
   demoUrl?: string;
   githubUrl?: string;
   category: string;
@@ -150,7 +150,7 @@ export default function PortfolioPage() {
                     <Image
                       width={800}
                       height={400}
-                      src={project.imageUrl || '/placeholder-project.svg'}
+                      src={project.image || '/placeholder-project.svg'}
                       alt={project.title}
                       className='w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300'
                     />
@@ -234,7 +234,7 @@ export default function PortfolioPage() {
                   <Image
                     width={800}
                     height={400}
-                    src={project.imageUrl || '/placeholder-project.svg'}
+                    src={project.image || '/placeholder-project.svg'}
                     alt={project.title}
                     className='w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300'
                   />
