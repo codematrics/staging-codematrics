@@ -32,10 +32,10 @@ function generateSlug(title: string): string {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { slug } = await params;
+    const { slug } = await context.params;
     const query = new URL(request.url).searchParams;
     const publicView = query.get('public') === 'true';
     const action = query.get('action');
@@ -81,7 +81,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: { params: Promise<{ slug: string }> }
 ) {
   try {
     const isAuthenticated = await checkAdminAuth();
@@ -89,7 +89,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { slug } = await params;
+    const { slug } = await context.params;
     const body = await request.json();
 
     if (!slug) {
@@ -167,7 +167,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: { params: Promise<{ slug: string }> }
 ) {
   try {
     const isAuthenticated = await checkAdminAuth();
@@ -175,7 +175,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { slug } = await params;
+    const { slug } = await context.params;
 
     if (!slug) {
       return NextResponse.json(
