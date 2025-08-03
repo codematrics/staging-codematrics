@@ -215,11 +215,11 @@ export default function AdminBlogs() {
     window.URL.revokeObjectURL(url);
   };
 
-  const handleDeleteBlog = async (id: string) => {
+  const handleDeleteBlog = async (slug: string) => {
     if (!confirm('Are you sure you want to delete this blog?')) return;
 
     try {
-      const response = await fetch(`/api/blogs/${id}`, {
+      const response = await fetch(`/api/blogs/${slug}`, {
         method: 'DELETE',
       });
 
@@ -426,7 +426,7 @@ export default function AdminBlogs() {
                               variant='outline'
                               size='sm'
                               onClick={() =>
-                                router.push(`/admin/blogs/${blog._id}/edit`)
+                                router.push(`/admin/blogs/${blog.slug}/edit`)
                               }
                               className='flex items-center gap-1'
                             >
@@ -436,7 +436,7 @@ export default function AdminBlogs() {
                             <Button
                               variant='destructive'
                               size='sm'
-                              onClick={() => handleDeleteBlog(blog._id)}
+                              onClick={() => handleDeleteBlog(blog.slug)}
                               className='flex items-center gap-1'
                             >
                               <Trash2 className='h-3 w-3' />
@@ -633,7 +633,7 @@ export default function AdminBlogs() {
                   <Button
                     variant='outline'
                     onClick={() => {
-                      router.push(`/admin/blogs/${selectedBlog._id}/edit`);
+                      router.push(`/admin/blogs/${selectedBlog.slug}/edit`);
                       closeBlogModal();
                     }}
                     className='flex items-center gap-2'

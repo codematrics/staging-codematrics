@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 interface BlogData {
   _id: string;
+  slug: string;
   title: string;
   content: string;
   excerpt: string;
@@ -29,7 +30,7 @@ export default function EditBlogPage() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await fetch(`/api/blogs/${params.id}`);
+        const response = await fetch(`/api/blogs/${params.slug}`);
 
         if (response.status === 401) {
           router.push('/admin/login');
@@ -49,37 +50,47 @@ export default function EditBlogPage() {
       }
     };
 
-    if (params.id) {
+    if (params.slug) {
       fetchBlog();
     }
-  }, [params.id, router]);
+  }, [params.slug, router]);
 
   if (loading) {
     return (
-      <div className='min-h-screen bg-background flex items-center justify-center'>
-        <div className='text-center'>
-          <div className='animate-spin h-8 w-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4'></div>
-          <p>Loading blog...</p>
-        </div>
+      <div className='flex items-center justify-center min-h-screen'>
+        <div className='text-lg'>Loading...</div>
       </div>
     );
   }
 
   if (error || !blogData) {
     return (
-      <div className='min-h-screen bg-background flex items-center justify-center'>
+      <div className='flex items-center justify-center min-h-screen'>
         <div className='text-center'>
-          <p className='text-destructive mb-4'>{error || 'Blog not found'}</p>
-          <button
-            onClick={() => router.back()}
-            className='text-primary hover:underline'
-          >
-            Go back
-          </button>
+          <h1 className='text-2xl font-bold text-red-600 mb-4'>Error</h1>
+          <p className='text-gray-600'>{error || 'Blog not found'}</p>
         </div>
       </div>
     );
   }
 
-  return <BlogForm initialData={{ ...blogData, id: blogData._id }} isEditing />;
+  return (
+    <BlogForm
+      initialData={{
+        slug: blogData.slug,
+        title: blogData.title,
+        content: blogData.content,
+        excerpt: blogData.excerpt,
+        author: blogData.author,
+        status: blogData.status,
+        category: blogData.category,
+        tags: blogData.tags,
+        featuredImage: blogData.featuredImage,
+        metaTitle: blogData.metaTitle,
+        metaDescription: blogData.metaDescription,
+        metaKeywords: blogData.metaKeywords,
+      }}
+      isEditing={true}
+    />
+  );
 }

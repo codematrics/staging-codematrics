@@ -15,12 +15,12 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { ArrowLeft, Eye, Save } from 'lucide-react';
+import { ArrowLeft, Eye, Save, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface BlogFormData {
-  id?: string;
+  slug?: string;
   title: string;
   content: string;
   excerpt: string;
@@ -58,6 +58,8 @@ export default function BlogForm({
 }: BlogFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [tagInput, setTagInput] = useState('');
+  const [keywordInput, setKeywordInput] = useState('');
   const [formData, setFormData] = useState<BlogFormData>({
     title: '',
     content: '',
@@ -93,20 +95,51 @@ export default function BlogForm({
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleTagsChange = (value: string) => {
-    const tags = value
-      .split(',')
-      .map(tag => tag.trim())
-      .filter(Boolean);
-    handleInputChange('tags', tags);
+  const addTag = (tag: string) => {
+    const trimmedTag = tag.trim();
+    if (trimmedTag && !formData.tags.includes(trimmedTag)) {
+      handleInputChange('tags', [...formData.tags, trimmedTag]);
+    }
+    setTagInput('');
   };
 
-  const handleKeywordsChange = (value: string) => {
-    const keywords = value
-      .split(',')
-      .map(keyword => keyword.trim())
-      .filter(Boolean);
-    handleInputChange('metaKeywords', keywords);
+  const removeTag = (tagToRemove: string) => {
+    handleInputChange(
+      'tags',
+      formData.tags.filter(tag => tag !== tagToRemove)
+    );
+  };
+
+  const addKeyword = (keyword: string) => {
+    const trimmedKeyword = keyword.trim();
+    if (trimmedKeyword && !formData.metaKeywords.includes(trimmedKeyword)) {
+      handleInputChange('metaKeywords', [
+        ...formData.metaKeywords,
+        trimmedKeyword,
+      ]);
+    }
+    setKeywordInput('');
+  };
+
+  const removeKeyword = (keywordToRemove: string) => {
+    handleInputChange(
+      'metaKeywords',
+      formData.metaKeywords.filter(keyword => keyword !== keywordToRemove)
+    );
+  };
+
+  const handleTagKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addTag(tagInput);
+    }
+  };
+
+  const handleKeywordKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addKeyword(keywordInput);
+    }
   };
 
   const handleSubmit = async (status: 'draft' | 'published') => {
@@ -121,7 +154,7 @@ export default function BlogForm({
     setLoading(true);
     try {
       const submitData = { ...formData, status };
-      const url = isEditing ? `/api/blogs/${formData.id}` : '/api/blogs';
+      const url = isEditing ? `/api/blogs/${formData.slug}` : '/api/blogs';
       const method = isEditing ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -290,14 +323,36 @@ export default function BlogForm({
                 </div>
 
                 <div>
-                  <Label htmlFor='tags'>Tags (comma separated)</Label>
-                  <Input
-                    id='tags'
-                    value={formData.tags.join(', ')}
-                    onChange={e => handleTagsChange(e.target.value)}
-                    placeholder='react, typescript, web development'
-                    className='mt-1'
-                  />
+                  <Label htmlFor='tags'>Tags</Label>
+                  <div className='mt-1 space-y-2'>
+                    <Input
+                      id='tags'
+                      value={tagInput}
+                      onChange={e => setTagInput(e.target.value)}
+                      onKeyPress={handleTagKeyPress}
+                      placeholder='Type a tag and press Enter'
+                      className='w-full'
+                    />
+                    {formData.tags.length > 0 && (
+                      <div className='flex flex-wrap gap-2'>
+                        {formData.tags.map((tag, index) => (
+                          <span
+                            key={index}
+                            className='inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary text-sm rounded-md'
+                          >
+                            {tag}
+                            <button
+                              type='button'
+                              onClick={() => removeTag(tag)}
+                              className='ml-1 hover:text-destructive'
+                            >
+                              <X className='h-3 w-3' />
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div>
@@ -354,16 +409,36 @@ export default function BlogForm({
                 </div>
 
                 <div>
-                  <Label htmlFor='metaKeywords'>
-                    Meta Keywords (comma separated)
-                  </Label>
-                  <Input
-                    id='metaKeywords'
-                    value={formData.metaKeywords.join(', ')}
-                    onChange={e => handleKeywordsChange(e.target.value)}
-                    placeholder='web development, react, typescript'
-                    className='mt-1'
-                  />
+                  <Label htmlFor='metaKeywords'>Meta Keywords</Label>
+                  <div className='mt-1 space-y-2'>
+                    <Input
+                      id='metaKeywords'
+                      value={keywordInput}
+                      onChange={e => setKeywordInput(e.target.value)}
+                      onKeyPress={handleKeywordKeyPress}
+                      placeholder='Type a keyword and press Enter'
+                      className='w-full'
+                    />
+                    {formData.metaKeywords.length > 0 && (
+                      <div className='flex flex-wrap gap-2'>
+                        {formData.metaKeywords.map((keyword, index) => (
+                          <span
+                            key={index}
+                            className='inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary text-sm rounded-md'
+                          >
+                            {keyword}
+                            <button
+                              type='button'
+                              onClick={() => removeKeyword(keyword)}
+                              className='ml-1 hover:text-destructive'
+                            >
+                              <X className='h-3 w-3' />
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </CardContent>
             </Card>

@@ -37,6 +37,7 @@ export async function generateMetadata({
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/blogs/${slug}?public=true`,
       {
+        method: 'GET',
         cache: 'no-store',
       }
     );
@@ -239,7 +240,10 @@ const BlogDetailPage = async ({ params }: BlogDetailPageProps) => {
         <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='max-w-4xl mx-auto'>
             <article className='prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-muted prose-pre:text-foreground prose-blockquote:text-muted-foreground prose-blockquote:border-primary prose-a:text-primary hover:prose-a:text-primary/80'>
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: post.content }}
+                className='[&_h1]:text-4xl [&_h1]:font-bold [&_h1]:leading-tight [&_h1]:my-6 [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:leading-tight [&_h2]:my-5 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:leading-tight [&_h3]:my-4 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:leading-tight [&_h4]:my-3 [&_h5]:text-lg [&_h5]:font-bold [&_h5]:leading-tight [&_h5]:my-2 [&_h6]:text-base [&_h6]:font-bold [&_h6]:leading-tight [&_h6]:my-2 [&_p]:text-base [&_p]:leading-relaxed [&_p]:my-4 [&_strong]:font-bold [&_em]:italic [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_pre]:bg-gray-900 [&_pre]:text-white [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:my-4 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:my-4 [&_blockquote]:italic [&_blockquote]:text-muted-foreground [&_ul]:my-4 [&_ul]:pl-6 [&_ol]:my-4 [&_ol]:pl-6 [&_li]:my-1 [&_a]:text-primary [&_a]:underline hover:[&_a]:text-primary/80 [&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_th]:border [&_th]:border-gray-300 [&_th]:p-2 [&_th]:bg-gray-50 [&_th]:font-bold [&_td]:border [&_td]:border-gray-300 [&_td]:p-2 [&_hr]:border-0 [&_hr]:border-t-2 [&_hr]:border-gray-300 [&_hr]:my-8'
+              />
             </article>
 
             {/* Article Footer */}
