@@ -28,7 +28,7 @@ interface Project {
 }
 
 interface PortfolioDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default function PortfolioDetailPage({
@@ -42,7 +42,7 @@ export default function PortfolioDetailPage({
     const fetchProject = async () => {
       try {
         const response = await fetch(
-          `/api/projects/${params.slug}?public=true`
+          `/api/projects/${(await params).slug}?public=true`
         );
 
         if (!response.ok) {
@@ -64,7 +64,7 @@ export default function PortfolioDetailPage({
     };
 
     fetchProject();
-  }, [params.slug]);
+  }, [params]);
 
   if (loading) {
     return (
