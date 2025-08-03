@@ -1,5 +1,6 @@
 import ConditionalLayout from '@/components/ConditionalLayout';
 import { Toaster } from '@/components/ui/toaster';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -99,9 +100,7 @@ export const metadata: Metadata = {
     creator: '@codematrics',
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
+    google: 'P0jHynGstXmNhoxIBQTnL-74RdmQrL1bBav43LQRTwA',
   },
   alternates: {
     canonical: 'https://codematrics.com',
@@ -121,6 +120,7 @@ export default function RootLayout({
         <ConditionalLayout>{children}</ConditionalLayout>
         <Toaster />
       </body>
+      <GoogleAnalytics gaId='G-ZV0X3M9MQC' />
     </html>
   );
 }
