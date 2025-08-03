@@ -44,7 +44,7 @@ export async function generateMetadata({
 
     if (!response.ok) {
       return {
-        title: 'Blog Not Found | CodeMatrix',
+        title: 'Blog Not Found | CodeMatrics',
         description: 'The requested blog post could not be found.',
       };
     }
@@ -52,30 +52,44 @@ export async function generateMetadata({
     const post: BlogPost = await response.json();
 
     return {
-      title: post.metaTitle || `${post.title} | CodeMatrix Blog`,
+      title: post.metaTitle || `${post.title} | CodeMatrics Blog`,
       description:
         post.metaDescription ||
         post.excerpt ||
-        'Read the latest insights on web development and technology.',
+        'Read the latest insights on web development and technology from CodeMatrics.',
       keywords: post.metaKeywords || [
         ...post.tags,
         post.category,
         'web development',
-        'technology',
-        'CodeMatrix',
+        'mobile development',
+        'UI UX design',
+        'backend development',
+        'full stack development',
+        'technology blog',
+        'programming tutorials',
+        'software development',
+        'CodeMatrics',
+        'tech insights',
+        'development tips',
+        'coding best practices',
       ],
       openGraph: {
         title: post.title,
         description: post.excerpt,
+        url: `https://codematrics.com/blog/${post.slug}`,
+        siteName: 'CodeMatrics',
         type: 'article',
         publishedTime: post.createdAt,
         modifiedTime: post.updatedAt,
         authors: [post.author],
         tags: post.tags,
+        locale: 'en_US',
         ...(post.featuredImage && {
           images: [
             {
               url: post.featuredImage,
+              width: 1200,
+              height: 630,
               alt: post.title,
             },
           ],
@@ -89,10 +103,13 @@ export async function generateMetadata({
           images: [post.featuredImage],
         }),
       },
+      alternates: {
+        canonical: `https://codematrics.com/blog/${post.slug}`,
+      },
     };
   } catch {
     return {
-      title: 'Blog Not Found | CodeMatrix',
+      title: 'Blog Not Found | CodeMatrics',
       description: 'The requested blog post could not be found.',
     };
   }

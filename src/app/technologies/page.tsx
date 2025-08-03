@@ -1,4 +1,90 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Technologies & Tech Stack - Modern Development Tools | CodeMatrics',
+  description:
+    'Discover CodeMatrics comprehensive technology stack. We use cutting-edge frontend, backend, mobile, and database technologies including React, Node.js, Python, MongoDB, and more to build scalable solutions.',
+  keywords: [
+    'technology stack',
+    'web development technologies',
+    'frontend technologies',
+    'backend technologies',
+    'mobile development stack',
+    'database technologies',
+    'React development',
+    'Vue.js development',
+    'Angular development',
+    'Node.js backend',
+    'Python development',
+    'PHP development',
+    'JavaScript frameworks',
+    'TypeScript development',
+    'HTML5 CSS3',
+    'responsive frameworks',
+    'Bootstrap framework',
+    'Tailwind CSS',
+    'Sass SCSS',
+    'MongoDB database',
+    'PostgreSQL database',
+    'MySQL database',
+    'Firebase backend',
+    'AWS cloud services',
+    'Google Cloud Platform',
+    'Microsoft Azure',
+    'React Native mobile',
+    'Flutter development',
+    'iOS development',
+    'Android development',
+    'Progressive Web Apps',
+    'API development',
+    'RESTful services',
+    'GraphQL APIs',
+    'Microservices architecture',
+    'Docker containers',
+    'Kubernetes orchestration',
+    'CI/CD pipelines',
+    'Git version control',
+    'Agile methodologies',
+    'DevOps practices',
+    'Testing frameworks',
+    'Jest testing',
+    'Cypress testing',
+    'Selenium automation',
+    'modern web technologies',
+    'enterprise technologies',
+    'scalable architectures',
+    'performance optimization',
+    'security best practices',
+  ],
+  openGraph: {
+    title: 'Technologies & Tech Stack - Modern Development Tools | CodeMatrics',
+    description:
+      'Discover CodeMatrics comprehensive technology stack with cutting-edge frontend, backend, mobile, and database technologies for scalable solutions.',
+    url: 'https://codematrics.com/technologies',
+    siteName: 'CodeMatrics',
+    images: [
+      {
+        url: '/og-technologies.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CodeMatrics Technologies & Tech Stack',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Technologies & Tech Stack - Modern Development Tools | CodeMatrics',
+    description:
+      'Discover CodeMatrics comprehensive technology stack with cutting-edge frontend, backend, mobile, and database technologies for scalable solutions.',
+    images: ['/og-technologies.jpg'],
+  },
+  alternates: {
+    canonical: 'https://codematrics.com/technologies',
+  },
+};
 
 const Technologies = () => {
   const techCategories = [

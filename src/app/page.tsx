@@ -12,7 +12,91 @@ import {
   Smartphone,
   Star,
 } from 'lucide-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'CodeMatrics - Premier IT Solutions & Software Development Company',
+  description:
+    'Transform your business with CodeMatrics cutting-edge IT solutions. Expert web development, mobile app development, UI/UX design, backend development, and digital transformation services. Get custom software solutions that drive growth.',
+  keywords: [
+    'IT solutions company',
+    'software development services',
+    'web development company',
+    'mobile app development',
+    'UI UX design services',
+    'backend development',
+    'full stack development',
+    'custom software development',
+    'business automation solutions',
+    'digital transformation',
+    'React development services',
+    'Node.js development',
+    'JavaScript development',
+    'TypeScript development',
+    'Python development',
+    'database design',
+    'API development',
+    'cloud solutions',
+    'enterprise software',
+    'startup development services',
+    'e-commerce development',
+    'responsive web design',
+    'mobile first design',
+    'scalable applications',
+    'technology consulting',
+    'software consulting',
+    'IT consulting services',
+    'CodeMatrics India',
+    'best IT company India',
+    'top software company',
+    'reliable IT services',
+    'affordable web development',
+    'professional mobile apps',
+    'modern UI design',
+    'user experience design',
+    'conversion optimization',
+    'performance optimization',
+    'SEO friendly development',
+    'secure applications',
+    'microservices architecture',
+    'MongoDB development',
+    'PostgreSQL development',
+    'Next.js development',
+    'React Native development',
+    'Flutter development',
+  ],
+  openGraph: {
+    title: 'CodeMatrics - Premier IT Solutions & Software Development Company',
+    description:
+      'Transform your business with cutting-edge IT solutions. Expert web development, mobile apps, UI/UX design, and backend development services.',
+    url: 'https://codematrics.com',
+    siteName: 'CodeMatrics',
+    images: [
+      {
+        url: '/og-home.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CodeMatrics - Premier IT Solutions & Software Development',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CodeMatrics - Premier IT Solutions & Software Development Company',
+    description:
+      'Transform your business with cutting-edge IT solutions. Expert web development, mobile apps, UI/UX design, and backend development services.',
+    images: ['/og-home.jpg'],
+  },
+  alternates: {
+    canonical: 'https://codematrics.com',
+  },
+  other: {
+    'format-detection': 'telephone=no',
+  },
+};
 
 const Home = async () => {
   // Fetch latest blog posts
