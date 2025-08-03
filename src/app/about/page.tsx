@@ -9,6 +9,7 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
+import Link from 'next/link';
 
 const About = () => {
   const values = [
@@ -220,16 +221,16 @@ const About = () => {
               innovative technology solutions.
             </p>
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              <a href='/contact' className='inline-block'>
+              <Link href='/contact' className='inline-block'>
                 <button className='bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors shadow-hero'>
                   Get Started Today
                 </button>
-              </a>
-              <a href='/portfolio' className='inline-block'>
+              </Link>
+              <Link href='/portfolio' className='inline-block'>
                 <button className='border border-white/30 text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 backdrop-blur-sm transition-colors'>
                   View Our Work
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
